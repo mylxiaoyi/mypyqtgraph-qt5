@@ -1,4 +1,4 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from ..python2_3 import sortList
 from .. import functions as fn
 from .GraphicsObject import GraphicsObject
@@ -784,7 +784,7 @@ class GradientEditorItem(TickSliderItem):
         self.sigGradientChangeFinished.emit(self)
 
         
-class Tick(QtGui.QGraphicsObject):  ## NOTE: Making this a subclass of GraphicsObject instead results in 
+class Tick(QtWidgets.QGraphicsObject):  ## NOTE: Making this a subclass of GraphicsObject instead results in 
                                     ## activating this bug: https://bugreports.qt-project.org/browse/PYSIDE-86
     ## private class
     
@@ -805,7 +805,7 @@ class Tick(QtGui.QGraphicsObject):  ## NOTE: Making this a subclass of GraphicsO
         self.pg.lineTo(QtCore.QPointF(scale/3**0.5, scale))
         self.pg.closeSubpath()
         
-        QtGui.QGraphicsObject.__init__(self)
+        QtWidgets.QGraphicsObject.__init__(self)
         self.setPos(pos[0], pos[1])
         if self.movable:
             self.setZValue(1)
@@ -870,10 +870,10 @@ class Tick(QtGui.QGraphicsObject):  ## NOTE: Making this a subclass of GraphicsO
         self.update()
         
 
-class TickMenu(QtGui.QMenu):
+class TickMenu(QtWidgets.QMenu):
     
     def __init__(self, tick, sliderItem):
-        QtGui.QMenu.__init__(self)
+        QtWidgets.QMenu.__init__(self)
         
         self.tick = weakref.ref(tick)
         self.sliderItem = weakref.ref(sliderItem)
@@ -883,8 +883,8 @@ class TickMenu(QtGui.QMenu):
             self.removeAct.setEnabled(False)
             
         positionMenu = self.addMenu("Set Position")
-        w = QtGui.QWidget()
-        l = QtGui.QGridLayout()
+        w = QtWidgets.QWidget()
+        l = QtWidgets.QGridLayout()
         w.setLayout(l)
         
         value = sliderItem.tickValue(tick)
@@ -901,7 +901,7 @@ class TickMenu(QtGui.QMenu):
         #if self.sliderItem().dataParent is None:
         #    self.dataPosSpin.setEnabled(False)
         
-        a = QtGui.QWidgetAction(self)
+        a = QtWidgets.QWidgetAction(self)
         a.setDefaultWidget(w)
         positionMenu.addAction(a)        
         

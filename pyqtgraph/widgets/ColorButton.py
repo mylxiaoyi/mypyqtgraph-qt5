@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .. import functions as functions
 
 __all__ = ['ColorButton']
 
-class ColorButton(QtGui.QPushButton):
+class ColorButton(QtWidgets.QPushButton):
     """
     **Bases:** QtGui.QPushButton
     
@@ -20,11 +20,11 @@ class ColorButton(QtGui.QPushButton):
     sigColorChanged = QtCore.Signal(object)   ## emitted when the selected color is accepted (user clicks OK)
     
     def __init__(self, parent=None, color=(128,128,128)):
-        QtGui.QPushButton.__init__(self, parent)
+        QtWidgets.QPushButton.__init__(self, parent)
         self.setColor(color)
-        self.colorDialog = QtGui.QColorDialog()
-        self.colorDialog.setOption(QtGui.QColorDialog.ShowAlphaChannel, True)
-        self.colorDialog.setOption(QtGui.QColorDialog.DontUseNativeDialog, True)
+        self.colorDialog = QtWidgets.QColorDialog()
+        self.colorDialog.setOption(QtWidgets.QColorDialog.ShowAlphaChannel, True)
+        self.colorDialog.setOption(QtWidgets.QColorDialog.DontUseNativeDialog, True)
         self.colorDialog.currentColorChanged.connect(self.dialogColorChanged)
         self.colorDialog.rejected.connect(self.colorRejected)
         self.colorDialog.colorSelected.connect(self.colorSelected)
@@ -35,7 +35,7 @@ class ColorButton(QtGui.QPushButton):
         self.setMinimumWidth(15)
         
     def paintEvent(self, ev):
-        QtGui.QPushButton.paintEvent(self, ev)
+        QtWidgets.QPushButton.paintEvent(self, ev)
         p = QtGui.QPainter(self)
         rect = self.rect().adjusted(6, 6, -6, -6)
         ## draw white base, then texture for indicating transparency, then actual color

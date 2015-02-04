@@ -5,7 +5,7 @@ Copyright 2010  Luke Campagnola
 Distributed under MIT/X11 license. See license.txt for more infomation.
 """
 
-from .Qt import QtCore, QtGui
+from .Qt import QtCore, QtGui, QtWidgets
 from .widgets.PlotWidget import *
 from .imageview import *
 from .widgets.GraphicsLayoutWidget import GraphicsLayoutWidget
@@ -13,9 +13,9 @@ from .widgets.GraphicsView import GraphicsView
 QAPP = None
 
 def mkQApp():
-    if QtGui.QApplication.instance() is None:
+    if QtWidgets.QApplication.instance() is None:
         global QAPP
-        QAPP = QtGui.QApplication([])
+        QAPP = QtWidgets.QApplication([])
 
 
 class GraphicsWindow(GraphicsLayoutWidget):
@@ -33,12 +33,12 @@ class GraphicsWindow(GraphicsLayoutWidget):
         self.show()
         
 
-class TabWindow(QtGui.QMainWindow):
+class TabWindow(QtWidgets.QMainWindow):
     def __init__(self, title=None, size=(800,600)):
         mkQApp()
-        QtGui.QMainWindow.__init__(self)
+        QtWidgets.QMainWindow.__init__(self)
         self.resize(*size)
-        self.cw = QtGui.QTabWidget()
+        self.cw = QtWidgets.QTabWidget()
         self.setCentralWidget(self.cw)
         if title is not None:
             self.setWindowTitle(title)
@@ -54,7 +54,7 @@ class TabWindow(QtGui.QMainWindow):
 class PlotWindow(PlotWidget):
     def __init__(self, title=None, **kargs):
         mkQApp()
-        self.win = QtGui.QMainWindow()
+        self.win = QtWidgets.QMainWindow()
         PlotWidget.__init__(self, **kargs)
         self.win.setCentralWidget(self)
         for m in ['resize']:
@@ -67,7 +67,7 @@ class PlotWindow(PlotWidget):
 class ImageWindow(ImageView):
     def __init__(self, *args, **kargs):
         mkQApp()
-        self.win = QtGui.QMainWindow()
+        self.win = QtWidgets.QMainWindow()
         self.win.resize(800,600)
         if 'title' in kargs:
             self.win.setWindowTitle(kargs['title'])

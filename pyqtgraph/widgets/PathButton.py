@@ -1,13 +1,13 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .. import functions as fn
 
 __all__ = ['PathButton']
 
 
-class PathButton(QtGui.QPushButton):
+class PathButton(QtWidgets.QPushButton):
     """Simple PushButton extension which paints a QPainterPath on its face"""
     def __init__(self, parent=None, path=None, pen='default', brush=None, size=(30,30)):
-        QtGui.QPushButton.__init__(self, parent)
+        QtWidgets.QPushButton.__init__(self, parent)
         self.path = None
         if pen == 'default':
             pen = 'k'
@@ -31,7 +31,7 @@ class PathButton(QtGui.QPushButton):
         self.update()
         
     def paintEvent(self, ev):
-        QtGui.QPushButton.paintEvent(self, ev)
+        QtWidgets.QPushButton.paintEvent(self, ev)
         margin = 7
         geom = QtCore.QRectF(0, 0, self.width(), self.height()).adjusted(margin, margin, -margin, -margin)
         rect = self.path.boundingRect()

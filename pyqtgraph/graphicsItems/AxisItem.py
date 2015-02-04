@@ -1,4 +1,4 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from ..python2_3 import asUnicode
 import numpy as np
 from ..Point import Point
@@ -32,13 +32,13 @@ class AxisItem(GraphicsWidget):
         """
         
         GraphicsWidget.__init__(self, parent)
-        self.label = QtGui.QGraphicsTextItem(self)
+        self.label = QtWidgets.QGraphicsTextItem(self)
         self.picture = None
         self.orientation = orientation
         if orientation not in ['left', 'right', 'top', 'bottom']:
             raise Exception("Orientation argument must be one of 'left', 'right', 'top', or 'bottom'.")
         if orientation in ['left', 'right']:
-            self.label.rotate(-90)
+            self.label.setRotation(-90)
             
         self.style = {
             'tickTextOffset': [5, 2],  ## (horizontal, vertical) spacing between text and axis 

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from ..python2_3 import asUnicode
 
 import numpy as np
@@ -31,7 +31,7 @@ def _defersort(fn):
     return defersort
 
 
-class TableWidget(QtGui.QTableWidget):
+class TableWidget(QtWidgets.QTableWidget):
     """Extends QTableWidget with some useful functions for automatic data handling
     and copy / export context menu. Can automatically format and display a variety
     of data types (see :func:`setData() <pyqtgraph.TableWidget.setData>` for more
@@ -54,12 +54,12 @@ class TableWidget(QtGui.QTableWidget):
         ===================== =================================================
         """
         
-        QtGui.QTableWidget.__init__(self, *args)
+        QtWidgets.QTableWidget.__init__(self, *args)
         
         self.itemClass = TableWidgetItem
         
         self.setVerticalScrollMode(self.ScrollPerPixel)
-        self.setSelectionMode(QtGui.QAbstractItemView.ContiguousSelection)
+        self.setSelectionMode(QtWidgets.QAbstractItemView.ContiguousSelection)
         self.setSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
         self.clear()
         
@@ -78,7 +78,7 @@ class TableWidget(QtGui.QTableWidget):
         
         self.itemChanged.connect(self.handleItemChanged)
         
-        self.contextMenu = QtGui.QMenu()
+        self.contextMenu = QtWidgets.QMenu()
         self.contextMenu.addAction('Copy Selection').triggered.connect(self.copySel)
         self.contextMenu.addAction('Copy All').triggered.connect(self.copyAll)
         self.contextMenu.addAction('Save Selection').triggered.connect(self.saveSel)
@@ -86,7 +86,7 @@ class TableWidget(QtGui.QTableWidget):
         
     def clear(self):
         """Clear all contents from the table."""
-        QtGui.QTableWidget.clear(self)
+        QtWidgets.QTableWidget.clear(self)
         self.verticalHeadersSet = False
         self.horizontalHeadersSet = False
         self.items = []
@@ -334,11 +334,11 @@ class TableWidget(QtGui.QTableWidget):
 
     def copySel(self):
         """Copy selected data to clipboard."""
-        QtGui.QApplication.clipboard().setText(self.serialize(useSelection=True))
+        QtWidgets.QApplication.clipboard().setText(self.serialize(useSelection=True))
 
     def copyAll(self):
         """Copy all data to clipboard."""
-        QtGui.QApplication.clipboard().setText(self.serialize(useSelection=False))
+        QtWidgets.QApplication.clipboard().setText(self.serialize(useSelection=False))
 
     def saveSel(self):
         """Save selected data to file."""
@@ -349,7 +349,7 @@ class TableWidget(QtGui.QTableWidget):
         self.save(self.serialize(useSelection=False))
 
     def save(self, data):
-        fileName = QtGui.QFileDialog.getSaveFileName(self, "Save As..", "", "Tab-separated values (*.tsv)")
+        fileName = QtWidgets.QFileDialog.getSaveFileName(self, "Save As..", "", "Tab-separated values (*.tsv)")
         if fileName == '':
             return
         open(fileName, 'w').write(data)
@@ -368,9 +368,9 @@ class TableWidget(QtGui.QTableWidget):
         item.itemChanged()
 
 
-class TableWidgetItem(QtGui.QTableWidgetItem):
+class TableWidgetItem(QtWidgets.QTableWidgetItem):
     def __init__(self, val, index, format=None):
-        QtGui.QTableWidgetItem.__init__(self, '')
+        QtWidgets.QTableWidgetItem.__init__(self, '')
         self._blockValueChange = False
         self._format = None
         self._defaultFormat = '%0.3g'
@@ -475,8 +475,8 @@ class TableWidgetItem(QtGui.QTableWidgetItem):
 
 
 if __name__ == '__main__':
-    app = QtGui.QApplication([])
-    win = QtGui.QMainWindow()
+    app = QtWidgets.QApplication([])
+    win = QtWidgets.QMainWindow()
     t = TableWidget()
     win.setCentralWidget(t)
     win.resize(800,600)

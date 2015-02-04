@@ -1,4 +1,4 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .. import functions as fn
 from .GraphicsWidget import GraphicsWidget
 from .GraphicsWidgetAnchor import GraphicsWidgetAnchor
@@ -19,7 +19,7 @@ class LabelItem(GraphicsWidget, GraphicsWidgetAnchor):
     def __init__(self, text=' ', parent=None, angle=0, **args):
         GraphicsWidget.__init__(self, parent)
         GraphicsWidgetAnchor.__init__(self)
-        self.item = QtGui.QGraphicsTextItem(self)
+        self.item = QtWidgets.QGraphicsTextItem(self)
         self.opts = {
             'color': None,
             'justify': 'center'
@@ -109,7 +109,7 @@ class LabelItem(GraphicsWidget, GraphicsWidgetAnchor):
     def setAngle(self, angle):
         self.angle = angle
         self.item.resetTransform()
-        self.item.rotate(angle)
+        self.item.setRotation(angle)
         self.updateMin()
         
         

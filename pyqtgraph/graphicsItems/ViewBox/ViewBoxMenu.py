@@ -1,4 +1,4 @@
-from ...Qt import QtCore, QtGui, USE_PYSIDE
+from ...Qt import QtCore, QtGui, QtWidgets, USE_PYSIDE
 from ...python2_3 import asUnicode
 from ...WidgetGroup import WidgetGroup
 
@@ -9,16 +9,16 @@ else:
 
 import weakref 
 
-class ViewBoxMenu(QtGui.QMenu):
+class ViewBoxMenu(QtWidgets.QMenu):
     def __init__(self, view):
-        QtGui.QMenu.__init__(self)
+        QtWidgets.QMenu.__init__(self)
         
         self.view = weakref.ref(view)  ## keep weakref to view to avoid circular reference (don't know why, but this prevents the ViewBox from being collected)
         self.valid = False  ## tells us whether the ui needs to be updated
         self.viewMap = weakref.WeakValueDictionary()  ## weakrefs to all views listed in the link combos
 
         self.setTitle("ViewBox options")
-        self.viewAll = QtGui.QAction("View All", self)
+        self.viewAll = QtWidgets.QAction("View All", self)
         self.viewAll.triggered.connect(self.autoRange)
         self.addAction(self.viewAll)
         
@@ -27,12 +27,12 @@ class ViewBoxMenu(QtGui.QMenu):
         self.widgetGroups = []
         self.dv = QtGui.QDoubleValidator(self)
         for axis in 'XY':
-            m = QtGui.QMenu()
+            m = QtWidgets.QMenu()
             m.setTitle("%s Axis" % axis)
-            w = QtGui.QWidget()
+            w = QtWidgets.QWidget()
             ui = AxisCtrlTemplate()
             ui.setupUi(w)
-            a = QtGui.QWidgetAction(self)
+            a = QtWidgets.QWidgetAction(self)
             a.setDefaultWidget(w)
             m.addAction(a)
             self.addMenu(m)
@@ -63,15 +63,15 @@ class ViewBoxMenu(QtGui.QMenu):
         #self.setExportMethods(view.exportMethods)
         #self.addMenu(self.export)
         
-        self.leftMenu = QtGui.QMenu("Mouse Mode")
-        group = QtGui.QActionGroup(self)
+        self.leftMenu = QtWidgets.QMenu("Mouse Mode")
+        group = QtWidgets.QActionGroup(self)
         
         # This does not work! QAction _must_ be initialized with a permanent 
         # object as the parent or else it may be collected prematurely.
         #pan = self.leftMenu.addAction("3 button", self.set3ButtonMode)
         #zoom = self.leftMenu.addAction("1 button", self.set1ButtonMode)
-        pan = QtGui.QAction("3 button", self.leftMenu)
-        zoom = QtGui.QAction("1 button", self.leftMenu)
+        pan = QtWidgets.QAction("3 button", self.leftMenu)
+        zoom = QtWidgets.QAction("1 button", self.leftMenu)
         self.leftMenu.addAction(pan)
         self.leftMenu.addAction(zoom)
         pan.triggered.connect(self.set3ButtonMode)
@@ -147,7 +147,7 @@ class ViewBoxMenu(QtGui.QMenu):
     def popup(self, *args):
         if not self.valid:
             self.updateState()
-        QtGui.QMenu.popup(self, *args)
+        QtWidgets.QMenu.popup(self, *args)
         
     def autoRange(self):
         self.view().autoRange()  ## don't let signal call this directly--it'll add an unwanted argument

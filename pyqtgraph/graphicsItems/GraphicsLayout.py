@@ -1,4 +1,4 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .. import functions as fn
 from .GraphicsWidget import GraphicsWidget
 ## Must be imported at the end to avoid cyclic-dependency hell:
@@ -19,13 +19,13 @@ class GraphicsLayout(GraphicsWidget):
         if border is True:
             border = (100,100,100)
         self.border = border
-        self.layout = QtGui.QGraphicsGridLayout()
+        self.layout = QtWidgets.QGraphicsGridLayout()
         self.setLayout(self.layout)
         self.items = {}  ## item: [(row, col), (row, col), ...]  lists all cells occupied by the item
         self.rows = {}   ## row: {col1: item1, col2: item2, ...}    maps cell location to item
         self.currentRow = 0
         self.currentCol = 0
-        self.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding))
+        self.setSizePolicy(QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding))
     
     #def resizeEvent(self, ev):
         #ret = GraphicsWidget.resizeEvent(self, ev)

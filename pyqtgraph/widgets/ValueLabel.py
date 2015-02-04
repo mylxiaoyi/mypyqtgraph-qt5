@@ -1,11 +1,11 @@
-from ..Qt import QtCore, QtGui
+from ..Qt import QtCore, QtGui, QtWidgets
 from ..ptime import time
 from .. import functions as fn
 from functools import reduce
 
 __all__ = ['ValueLabel']
 
-class ValueLabel(QtGui.QLabel):
+class ValueLabel(QtWidgets.QLabel):
     """
     QLabel specifically for displaying numerical values.
     Extends QLabel adding some extra functionality:
@@ -29,7 +29,7 @@ class ValueLabel(QtGui.QLabel):
                             This option is not compatible with siPrefix
         ==============      ==================================================================================
         """
-        QtGui.QLabel.__init__(self, parent)
+        QtWidgets.QLabel.__init__(self, parent)
         self.values = []
         self.averageTime = averageTime ## no averaging by default
         self.suffix = suffix
@@ -59,7 +59,7 @@ class ValueLabel(QtGui.QLabel):
         
     def paintEvent(self, ev):
         self.setText(self.generateText())
-        return QtGui.QLabel.paintEvent(self, ev)
+        return QtWidgets.QLabel.paintEvent(self, ev)
         
     def generateText(self):
         if len(self.values) == 0:

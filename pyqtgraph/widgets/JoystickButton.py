@@ -1,13 +1,13 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 
 
 __all__ = ['JoystickButton']
 
-class JoystickButton(QtGui.QPushButton):
+class JoystickButton(QtWidgets.QPushButton):
     sigStateChanged = QtCore.Signal(object, object)  ## self, state
     
     def __init__(self, parent=None):
-        QtGui.QPushButton.__init__(self, parent)
+        QtWidgets.QPushButton.__init__(self, parent)
         self.radius = 200
         self.setCheckable(True)
         self.state = None
@@ -64,20 +64,20 @@ class JoystickButton(QtGui.QPushButton):
         self.sigStateChanged.emit(self, self.state)
         
     def paintEvent(self, ev):
-        QtGui.QPushButton.paintEvent(self, ev)
+        QtWidgets.QPushButton.paintEvent(self, ev)
         p = QtGui.QPainter(self)
         p.setBrush(QtGui.QBrush(QtGui.QColor(0,0,0)))
         p.drawEllipse(self.spotPos.x()-3,self.spotPos.y()-3,6,6)
         
     def resizeEvent(self, ev):
         self.setState(*self.state)
-        QtGui.QPushButton.resizeEvent(self, ev)
+        QtWidgets.QPushButton.resizeEvent(self, ev)
         
         
         
 if __name__ == '__main__':
-    app = QtGui.QApplication([])
-    w = QtGui.QMainWindow()
+    app = QtWidgets.QApplication([])
+    w = QtWidgets.QMainWindow()
     b = JoystickButton()
     w.setCentralWidget(b)
     w.show()

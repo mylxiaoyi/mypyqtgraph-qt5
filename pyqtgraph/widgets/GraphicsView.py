@@ -5,7 +5,7 @@ Copyright 2010  Luke Campagnola
 Distributed under MIT/X11 license. See license.txt for more infomation.
 """
 
-from ..Qt import QtCore, QtGui, USE_PYSIDE
+from ..Qt import QtCore, QtGui, QtWidgets, USE_PYSIDE
 
 try:
     from ..Qt import QtOpenGL
@@ -24,7 +24,7 @@ from .. import getConfigOption
 
 __all__ = ['GraphicsView']
 
-class GraphicsView(QtGui.QGraphicsView):
+class GraphicsView(QtWidgets.QGraphicsView):
     """Re-implementation of QGraphicsView that removes scrollbars and allows unambiguous control of the 
     viewed coordinate range. Also automatically creates a GraphicsScene and a central QGraphicsWidget
     that is automatically scaled to the full view geometry.
@@ -69,7 +69,7 @@ class GraphicsView(QtGui.QGraphicsView):
         
         self.closed = False
         
-        QtGui.QGraphicsView.__init__(self, parent)
+        QtWidgets.QGraphicsView.__init__(self, parent)
         
         # This connects a cleanup function to QApplication.aboutToQuit. It is
         # called from here because we have no good way to react when the
@@ -92,12 +92,12 @@ class GraphicsView(QtGui.QGraphicsView):
         self.setBackground(background)
         
         self.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.setFrameShape(QtGui.QFrame.NoFrame)
+        self.setFrameShape(QtWidgets.QFrame.NoFrame)
         self.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
         self.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
-        self.setTransformationAnchor(QtGui.QGraphicsView.NoAnchor)
-        self.setResizeAnchor(QtGui.QGraphicsView.AnchorViewCenter)
-        self.setViewportUpdateMode(QtGui.QGraphicsView.MinimalViewportUpdate)
+        self.setTransformationAnchor(QtWidgets.QGraphicsView.NoAnchor)
+        self.setResizeAnchor(QtWidgets.QGraphicsView.AnchorViewCenter)
+        self.setViewportUpdateMode(QtWidgets.QGraphicsView.MinimalViewportUpdate)
         
         
         self.lockedViewports = []
@@ -121,8 +121,8 @@ class GraphicsView(QtGui.QGraphicsView):
         ## by default we set up a central widget with a grid layout.
         ## this can be replaced if needed.
         self.centralWidget = None
-        self.setCentralItem(QtGui.QGraphicsWidget())
-        self.centralLayout = QtGui.QGraphicsGridLayout()
+        self.setCentralItem(QtWidgets.QGraphicsWidget())
+        self.centralLayout = QtWidgets.QGraphicsGridLayout()
         self.centralWidget.setLayout(self.centralLayout)
         
         self.mouseEnabled = False
@@ -151,11 +151,11 @@ class GraphicsView(QtGui.QGraphicsView):
     
     def paintEvent(self, ev):
         self.scene().prepareForPaint()
-        return QtGui.QGraphicsView.paintEvent(self, ev)
+        return QtWidgets.QGraphicsView.paintEvent(self, ev)
     
     def render(self, *args, **kwds):
         self.scene().prepareForPaint()
-        return QtGui.QGraphicsView.render(self, *args, **kwds)
+        return QtWidgets.QGraphicsView.render(self, *args, **kwds)
         
     
     def close(self):
@@ -172,7 +172,7 @@ class GraphicsView(QtGui.QGraphicsView):
                 raise Exception("Requested to use OpenGL with QGraphicsView, but QtOpenGL module is not available.")
             v = QtOpenGL.QGLWidget()
         else:
-            v = QtGui.QWidget()
+            v = QtWidgets.QWidget()
             
         self.setViewport(v)
             
@@ -322,7 +322,7 @@ class GraphicsView(QtGui.QGraphicsView):
         GraphicsView.setRange(self, r1, padding=[0, padding], propagate=False)
         
     def wheelEvent(self, ev):
-        QtGui.QGraphicsView.wheelEvent(self, ev)
+        QtWidgets.QGraphicsView.wheelEvent(self, ev)
         if not self.mouseEnabled:
             return
         sc = 1.001 ** ev.delta()
@@ -337,7 +337,7 @@ class GraphicsView(QtGui.QGraphicsView):
         self.scene().leaveEvent(ev)  ## inform scene when mouse leaves
         
     def mousePressEvent(self, ev):
-        QtGui.QGraphicsView.mousePressEvent(self, ev)
+        QtWidgets.QGraphicsView.mousePressEvent(self, ev)
         
 
         if not self.mouseEnabled:
@@ -350,7 +350,7 @@ class GraphicsView(QtGui.QGraphicsView):
         return   ## Everything below disabled for now..
         
     def mouseReleaseEvent(self, ev):
-        QtGui.QGraphicsView.mouseReleaseEvent(self, ev)
+        QtWidgets.QGraphicsView.mouseReleaseEvent(self, ev)
         if not self.mouseEnabled:
             return 
         self.sigMouseReleased.emit(ev)
@@ -363,7 +363,7 @@ class GraphicsView(QtGui.QGraphicsView):
         delta = Point(ev.pos() - self.lastMousePos)
         self.lastMousePos = Point(ev.pos())
 
-        QtGui.QGraphicsView.mouseMoveEvent(self, ev)
+        QtWidgets.QGraphicsView.mouseMoveEvent(self, ev)
         if not self.mouseEnabled:
             return
         self.sigSceneMouseMoved.emit(self.mapToScene(ev.pos()))

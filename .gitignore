@@ -1,0 +1,15 @@
+pyqtgraph/*.pyc
+pyqtgraph/widgets/*.pyc
+tools/*.pyc
+examples/*.pyc
+pyqtgraph/util/*.pyc
+pyqtgraph/pixmaps/*.pyc
+pyqtgraph/util/colorama/*.pyc
+pyqtgraph/parametertree/*.pyc
+pyqtgraph/imageview/*.pyc
+pyqtgraph/graphicsItems/*.pyc
+pyqtgraph/graphicsItems/ViewBox/*.pyc
+build
+pyqtgraph/GraphicsScene/*.pyc
+pyqtgraph/graphicsItems/PlotItem/*.pyc
+pyqtgraph/metaarray/*.pyc

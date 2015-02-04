@@ -1,4 +1,4 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from . import ArrowItem
 import numpy as np
 from ..Point import Point
@@ -80,8 +80,8 @@ class CurvePoint(GraphicsObject):
         ang = np.arctan2(p2.y()-p1.y(), p2.x()-p1.x()) ## returns radians
         self.resetTransform()
         if self._rotate:
-            self.rotate(180+ ang * 180 / np.pi) ## takes degrees
-        QtGui.QGraphicsItem.setPos(self, *newPos)
+            self.setRotation(180+ ang * 180 / np.pi) ## takes degrees
+        QtWidgets.QGraphicsItem.setPos(self, *newPos)
         return True
         
     def boundingRect(self):

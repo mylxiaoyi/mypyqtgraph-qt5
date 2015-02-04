@@ -1,14 +1,14 @@
-from ..Qt import QtGui
+from ..Qt import QtGui, QtWidgets
 from .. import functions as fn
 from .PlotDataItem import PlotDataItem
 from .PlotCurveItem import PlotCurveItem
 
-class FillBetweenItem(QtGui.QGraphicsPathItem):
+class FillBetweenItem(QtWidgets.QGraphicsPathItem):
     """
     GraphicsItem filling the space between two PlotDataItems.
     """
     def __init__(self, curve1=None, curve2=None, brush=None):
-        QtGui.QGraphicsPathItem.__init__(self)
+        QtWidgets.QGraphicsPathItem.__init__(self)
         self.curves = None
         if curve1 is not None and curve2 is not None:
             self.setCurves(curve1, curve2)

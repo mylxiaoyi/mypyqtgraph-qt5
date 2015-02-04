@@ -1,4 +1,4 @@
-from ..Qt import QtCore, QtGui
+from ..Qt import QtCore, QtGui, QtWidgets
 from ..python2_3 import sortList
 import weakref
 from ..Point import Point
@@ -19,7 +19,7 @@ else:
 
 __all__ = ['GraphicsScene']
 
-class GraphicsScene(QtGui.QGraphicsScene):
+class GraphicsScene(QtWidgets.QGraphicsScene):
     """
     Extension of QGraphicsScene that implements a complete, parallel mouse event system.
     (It would have been preferred to just alter the way QGraphicsScene creates and delivers 
@@ -81,11 +81,11 @@ class GraphicsScene(QtGui.QGraphicsScene):
         (otherwise, mouse interaction with those objects will likely fail)
         """
         if HAVE_SIP and isinstance(obj, sip.wrapper):
-            cls._addressCache[sip.unwrapinstance(sip.cast(obj, QtGui.QGraphicsItem))] = obj
+            cls._addressCache[sip.unwrapinstance(sip.cast(obj, QtWidgets.QGraphicsItem))] = obj
             
             
     def __init__(self, clickRadius=2, moveDistance=5, parent=None):
-        QtGui.QGraphicsScene.__init__(self, parent)
+        QtWidgets.QGraphicsScene.__init__(self, parent)
         self.setClickRadius(clickRadius)
         self.setMoveDistance(moveDistance)
         self.exportDirectory = None
@@ -98,14 +98,14 @@ class GraphicsScene(QtGui.QGraphicsScene):
         self.hoverItems = weakref.WeakKeyDictionary()
         self.lastHoverEvent = None
         
-        self.contextMenu = [QtGui.QAction("Export...", self)]
+        self.contextMenu = [QtWidgets.QAction("Export...", self)]
         self.contextMenu[0].triggered.connect(self.showExportDialog)
         
         self.exportDialog = None
         
     def render(self, *args):
         self.prepareForPaint()
-        return QtGui.QGraphicsScene.render(self, *args)
+        return QtWidgets.QGraphicsScene.render(self, *args)
 
     def prepareForPaint(self):
         """Called before every render. This method will inform items that the scene is about to
@@ -134,7 +134,7 @@ class GraphicsScene(QtGui.QGraphicsScene):
 
     def mousePressEvent(self, ev):
         #print 'scenePress'
-        QtGui.QGraphicsScene.mousePressEvent(self, ev)
+        QtWidgets.QGraphicsScene.mousePressEvent(self, ev)
         if self.mouseGrabberItem() is None:  ## nobody claimed press; we are free to generate drag/click events
             if self.lastHoverEvent is not None:
                 # If the mouse has moved since the last hover event, send a new one.
@@ -155,13 +155,13 @@ class GraphicsScene(QtGui.QGraphicsScene):
         self.sigMouseMoved.emit(ev.scenePos())
         
         ## First allow QGraphicsScene to deliver hoverEnter/Move/ExitEvents
-        QtGui.QGraphicsScene.mouseMoveEvent(self, ev)
+        QtWidgets.QGraphicsScene.mouseMoveEvent(self, ev)
         
         ## Next deliver our own HoverEvents
         self.sendHoverEvents(ev)
         
         if int(ev.buttons()) != 0:  ## button is pressed; send mouseMoveEvents and mouseDragEvents
-            QtGui.QGraphicsScene.mouseMoveEvent(self, ev)
+            QtWidgets.QGraphicsScene.mouseMoveEvent(self, ev)
             if self.mouseGrabberItem() is None:
                 now = ptime.time()
                 init = False
@@ -207,12 +207,12 @@ class GraphicsScene(QtGui.QGraphicsScene):
             self.dragButtons = []
             self.clickEvents = []
             self.lastDrag = None
-        QtGui.QGraphicsScene.mouseReleaseEvent(self, ev)
+        QtWidgets.QGraphicsScene.mouseReleaseEvent(self, ev)
         
         self.sendHoverEvents(ev)  ## let items prepare for next click/drag
 
     def mouseDoubleClickEvent(self, ev):
-        QtGui.QGraphicsScene.mouseDoubleClickEvent(self, ev)
+        QtWidgets.QGraphicsScene.mouseDoubleClickEvent(self, ev)
         if self.mouseGrabberItem() is None:  ## nobody claimed press; we are free to generate drag/click events
             self.clickEvents.append(MouseClickEvent(ev, double=True))
         
@@ -356,7 +356,7 @@ class GraphicsScene(QtGui.QGraphicsScene):
         
     def items(self, *args):
         #print 'args:', args
-        items = QtGui.QGraphicsScene.items(self, *args)
+        items = QtWidgets.QGraphicsScene.items(self, *args)
         ## PyQt bug: items() returns a list of QGraphicsItem instances. If the item is subclassed from QGraphicsObject,
         ## then the object returned will be different than the actual item that was originally added to the scene
         items2 = list(map(self.translateGraphicsItem, items))
@@ -371,7 +371,7 @@ class GraphicsScene(QtGui.QGraphicsScene):
         return items2
     
     def selectedItems(self, *args):
-        items = QtGui.QGraphicsScene.selectedItems(self, *args)
+        items = QtWidgets.QGraphicsScene.selectedItems(self, *args)
         ## PyQt bug: items() returns a list of QGraphicsItem instances. If the item is subclassed from QGraphicsObject,
         ## then the object returned will be different than the actual item that was originally added to the scene
         #if HAVE_SIP and isinstance(self, sip.wrapper):
@@ -387,7 +387,7 @@ class GraphicsScene(QtGui.QGraphicsScene):
         return items2
 
     def itemAt(self, *args):
-        item = QtGui.QGraphicsScene.itemAt(self, *args)
+        item = QtWidgets.QGraphicsScene.itemAt(self, *args)
         
         ## PyQt bug: items() returns a list of QGraphicsItem instances. If the item is subclassed from QGraphicsObject,
         ## then the object returned will be different than the actual item that was originally added to the scene
@@ -518,9 +518,9 @@ class GraphicsScene(QtGui.QGraphicsScene):
             menu.addSeparator()
 
         for m in menusToAdd:
-            if isinstance(m, QtGui.QMenu):
+            if isinstance(m, QtWidgets.QMenu):
                 menu.addMenu(m)
-            elif isinstance(m, QtGui.QAction):
+            elif isinstance(m, QtWidgets.QAction):
                 menu.addAction(m)
             else:
                 raise Exception("Cannot add object %s (type=%s) to QMenu." % (str(m), str(type(m))))
@@ -541,7 +541,7 @@ class GraphicsScene(QtGui.QGraphicsScene):
     def translateGraphicsItem(item):
         ## for fixing pyqt bugs where the wrong item is returned
         if HAVE_SIP and isinstance(item, sip.wrapper):
-            addr = sip.unwrapinstance(sip.cast(item, QtGui.QGraphicsItem))
+            addr = sip.unwrapinstance(sip.cast(item, QtWidgets.QGraphicsItem))
             item = GraphicsScene._addressCache.get(addr, item)
         return item
 

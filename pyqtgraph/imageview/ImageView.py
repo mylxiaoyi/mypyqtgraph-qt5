@@ -15,7 +15,7 @@ Widget used for displaying 2D or 3D data. Features:
 import os, sys
 import numpy as np
 
-from ..Qt import QtCore, QtGui, USE_PYSIDE
+from ..Qt import QtCore, QtGui, QtWidgets, USE_PYSIDE
 if USE_PYSIDE:
     from .ImageViewTemplate_pyside import *
 else:
@@ -43,7 +43,7 @@ class PlotROI(ROI):
         self.addRotateHandle([0, 0], [0.5, 0.5])
 
 
-class ImageView(QtGui.QWidget):
+class ImageView(QtWidgets.QWidget):
     """
     Widget used for display and analysis of image data.
     Implements many features:
@@ -106,7 +106,7 @@ class ImageView(QtGui.QWidget):
                 
             pg.ImageView(view=pg.PlotItem())
         """
-        QtGui.QWidget.__init__(self, parent, *args)
+        QtWidgets.QWidget.__init__(self, parent, *args)
         self.levelMax = 4096
         self.levelMin = 0
         self.name = name
@@ -399,7 +399,7 @@ class ImageView(QtGui.QWidget):
             self.keysPressed[ev.key()] = 1
             self.evalKeyState()
         else:
-            QtGui.QWidget.keyPressEvent(self, ev)
+            QtWidgets.QWidget.keyPressEvent(self, ev)
 
     def keyReleaseEvent(self, ev):
         if ev.key() in [QtCore.Qt.Key_Space, QtCore.Qt.Key_Home, QtCore.Qt.Key_End]:
@@ -414,7 +414,7 @@ class ImageView(QtGui.QWidget):
                 self.keysPressed = {}
             self.evalKeyState()
         else:
-            QtGui.QWidget.keyReleaseEvent(self, ev)
+            QtWidgets.QWidget.keyReleaseEvent(self, ev)
         
     def evalKeyState(self):
         if len(self.keysPressed) == 1:
@@ -698,18 +698,18 @@ class ImageView(QtGui.QWidget):
             self.imageItem.save(fileName)
             
     def exportClicked(self):
-        fileName = QtGui.QFileDialog.getSaveFileName()
+        fileName = QtWidgets.QFileDialog.getSaveFileName()
         if fileName == '':
             return
         self.export(fileName)
         
     def buildMenu(self):
-        self.menu = QtGui.QMenu()
-        self.normAction = QtGui.QAction("Normalization", self.menu)
+        self.menu = QtWidgets.QMenu()
+        self.normAction = QtWidgets.QAction("Normalization", self.menu)
         self.normAction.setCheckable(True)
         self.normAction.toggled.connect(self.normToggled)
         self.menu.addAction(self.normAction)
-        self.exportAction = QtGui.QAction("Export", self.menu)
+        self.exportAction = QtWidgets.QAction("Export", self.menu)
         self.exportAction.triggered.connect(self.exportClicked)
         self.menu.addAction(self.exportAction)
         

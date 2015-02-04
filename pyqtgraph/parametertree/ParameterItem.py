@@ -1,8 +1,8 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from ..python2_3 import asUnicode
 import os, weakref, re
 
-class ParameterItem(QtGui.QTreeWidgetItem):
+class ParameterItem(QtWidgets.QTreeWidgetItem):
     """
     Abstract ParameterTree item. 
     Used to represent the state of a Parameter from within a ParameterTree.
@@ -19,7 +19,7 @@ class ParameterItem(QtGui.QTreeWidgetItem):
         title = param.opts.get('title', None)
         if title is None:
             title = param.name()
-        QtGui.QTreeWidgetItem.__init__(self, [title, ''])
+        QtWidgets.QTreeWidgetItem.__init__(self, [title, ''])
 
         self.param = param
         self.param.registerItem(self)  ## let parameter know this item is connected to it (for debugging)

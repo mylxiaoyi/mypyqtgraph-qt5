@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 
 __all__ = ['ProgressDialog']
-class ProgressDialog(QtGui.QProgressDialog):
+class ProgressDialog(QtWidgets.QProgressDialog):
     """
     Extends QProgressDialog for use in 'with' statements.
 
@@ -43,7 +43,7 @@ class ProgressDialog(QtGui.QProgressDialog):
             
         self.busyCursor = busyCursor
             
-        QtGui.QProgressDialog.__init__(self, labelText, cancelText, minimum, maximum, parent)
+        QtWidgets.QProgressDialog.__init__(self, labelText, cancelText, minimum, maximum, parent)
         self.setMinimumDuration(wait)
         self.setWindowModality(QtCore.Qt.WindowModal)
         self.setValue(self.minimum())
@@ -55,14 +55,14 @@ class ProgressDialog(QtGui.QProgressDialog):
         if self.disabled:
             return self
         if self.busyCursor:
-            QtGui.QApplication.setOverrideCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
+            QtWidgets.QApplication.setOverrideCursor(QtGui.QCursor(QtCore.Qt.WaitCursor))
         return self
 
     def __exit__(self, exType, exValue, exTrace):
         if self.disabled:
             return
         if self.busyCursor:
-            QtGui.QApplication.restoreOverrideCursor()
+            QtWidgets.QApplication.restoreOverrideCursor()
         self.setValue(self.maximum())
         
     def __iadd__(self, val):
@@ -78,35 +78,35 @@ class ProgressDialog(QtGui.QProgressDialog):
     def setValue(self, val):
         if self.disabled:
             return
-        QtGui.QProgressDialog.setValue(self, val)
+        QtWidgets.QProgressDialog.setValue(self, val)
         
     def setLabelText(self, val):
         if self.disabled:
             return
-        QtGui.QProgressDialog.setLabelText(self, val)
+        QtWidgets.QProgressDialog.setLabelText(self, val)
     
     def setMaximum(self, val):
         if self.disabled:
             return
-        QtGui.QProgressDialog.setMaximum(self, val)
+        QtWidgets.QProgressDialog.setMaximum(self, val)
 
     def setMinimum(self, val):
         if self.disabled:
             return
-        QtGui.QProgressDialog.setMinimum(self, val)
+        QtWidgets.QProgressDialog.setMinimum(self, val)
         
     def wasCanceled(self):
         if self.disabled:
             return False
-        return QtGui.QProgressDialog.wasCanceled(self)
+        return QtWidgets.QProgressDialog.wasCanceled(self)
 
     def maximum(self):
         if self.disabled:
             return 0
-        return QtGui.QProgressDialog.maximum(self)
+        return QtWidgets.QProgressDialog.maximum(self)
 
     def minimum(self):
         if self.disabled:
             return 0
-        return QtGui.QProgressDialog.minimum(self)
+        return QtWidgets.QProgressDialog.minimum(self)
         

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from ..pgcollections import OrderedDict
 import types, traceback
 import numpy as np
@@ -12,7 +12,7 @@ except:
 
 __all__ = ['DataTreeWidget']
 
-class DataTreeWidget(QtGui.QTreeWidget):
+class DataTreeWidget(QtWidgets.QTreeWidget):
     """
     Widget for displaying hierarchical python data structures
     (eg, nested dicts, lists, and arrays)
@@ -20,7 +20,7 @@ class DataTreeWidget(QtGui.QTreeWidget):
     
     
     def __init__(self, parent=None, data=None):
-        QtGui.QTreeWidget.__init__(self, parent)
+        QtWidgets.QTreeWidget.__init__(self, parent)
         self.setVerticalScrollMode(self.ScrollPerPixel)
         self.setData(data)
         self.setColumnCount(3)
@@ -45,7 +45,7 @@ class DataTreeWidget(QtGui.QTreeWidget):
             typeStr = type(data).__name__
             if typeStr == 'instance':
                 typeStr += ": " + data.__class__.__name__
-            node = QtGui.QTreeWidgetItem([name, typeStr, ""])
+            node = QtWidgets.QTreeWidgetItem([name, typeStr, ""])
             parent.addChild(node)
         
         if isinstance(data, types.TracebackType):  ## convert traceback to a list of strings

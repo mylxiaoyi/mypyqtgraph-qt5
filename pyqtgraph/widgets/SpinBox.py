@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from ..python2_3 import asUnicode
 from ..SignalProxy import SignalProxy
 
@@ -10,7 +10,7 @@ from decimal import *
 import weakref
 
 __all__ = ['SpinBox']
-class SpinBox(QtGui.QAbstractSpinBox):
+class SpinBox(QtWidgets.QAbstractSpinBox):
     """
     **Bases:** QtGui.QAbstractSpinBox
     

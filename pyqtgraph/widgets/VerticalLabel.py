@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 
 __all__ = ['VerticalLabel']
 #class VerticalLabel(QtGui.QLabel):
@@ -17,9 +17,9 @@ __all__ = ['VerticalLabel']
         #else:
             #return QtCore.QSize(16, 50)
 
-class VerticalLabel(QtGui.QLabel):
+class VerticalLabel(QtWidgets.QLabel):
     def __init__(self, text, orientation='vertical', forceWidth=True):
-        QtGui.QLabel.__init__(self, text)
+        QtWidgets.QLabel.__init__(self, text)
         self.forceWidth = forceWidth
         self.orientation = None
         self.setOrientation(orientation)
@@ -81,10 +81,10 @@ class VerticalLabel(QtGui.QLabel):
 
 
 if __name__ == '__main__':
-    app = QtGui.QApplication([])
-    win = QtGui.QMainWindow()
-    w = QtGui.QWidget()
-    l = QtGui.QGridLayout()
+    app = QtWidgets.QApplication([])
+    win = QtWidgets.QMainWindow()
+    w = QtWidgets.QWidget()
+    l = QtWidgets.QGridLayout()
     w.setLayout(l)
     
     l1 = VerticalLabel("text 1", orientation='horizontal')

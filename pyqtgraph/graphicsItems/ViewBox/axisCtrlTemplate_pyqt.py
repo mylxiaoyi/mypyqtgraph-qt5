@@ -7,7 +7,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -16,30 +16,30 @@ except AttributeError:
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
         Form.resize(186, 154)
         Form.setMaximumSize(QtCore.QSize(200, 16777215))
-        self.gridLayout = QtGui.QGridLayout(Form)
-        self.gridLayout.setMargin(0)
+        self.gridLayout = QtWidgets.QGridLayout(Form)
+        #self.gridLayout.setMargin(0)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.label = QtGui.QLabel(Form)
+        self.label = QtWidgets.QLabel(Form)
         self.label.setObjectName(_fromUtf8("label"))
         self.gridLayout.addWidget(self.label, 7, 0, 1, 2)
-        self.linkCombo = QtGui.QComboBox(Form)
-        self.linkCombo.setSizeAdjustPolicy(QtGui.QComboBox.AdjustToContents)
+        self.linkCombo = QtWidgets.QComboBox(Form)
+        self.linkCombo.setSizeAdjustPolicy(QtWidgets.QComboBox.AdjustToContents)
         self.linkCombo.setObjectName(_fromUtf8("linkCombo"))
         self.gridLayout.addWidget(self.linkCombo, 7, 2, 1, 2)
-        self.autoPercentSpin = QtGui.QSpinBox(Form)
+        self.autoPercentSpin = QtWidgets.QSpinBox(Form)
         self.autoPercentSpin.setEnabled(True)
         self.autoPercentSpin.setMinimum(1)
         self.autoPercentSpin.setMaximum(100)
@@ -47,30 +47,30 @@ class Ui_Form(object):
         self.autoPercentSpin.setProperty("value", 100)
         self.autoPercentSpin.setObjectName(_fromUtf8("autoPercentSpin"))
         self.gridLayout.addWidget(self.autoPercentSpin, 2, 2, 1, 2)
-        self.autoRadio = QtGui.QRadioButton(Form)
+        self.autoRadio = QtWidgets.QRadioButton(Form)
         self.autoRadio.setChecked(True)
         self.autoRadio.setObjectName(_fromUtf8("autoRadio"))
         self.gridLayout.addWidget(self.autoRadio, 2, 0, 1, 2)
-        self.manualRadio = QtGui.QRadioButton(Form)
+        self.manualRadio = QtWidgets.QRadioButton(Form)
         self.manualRadio.setObjectName(_fromUtf8("manualRadio"))
         self.gridLayout.addWidget(self.manualRadio, 1, 0, 1, 2)
-        self.minText = QtGui.QLineEdit(Form)
+        self.minText = QtWidgets.QLineEdit(Form)
         self.minText.setObjectName(_fromUtf8("minText"))
         self.gridLayout.addWidget(self.minText, 1, 2, 1, 1)
-        self.maxText = QtGui.QLineEdit(Form)
+        self.maxText = QtWidgets.QLineEdit(Form)
         self.maxText.setObjectName(_fromUtf8("maxText"))
         self.gridLayout.addWidget(self.maxText, 1, 3, 1, 1)
-        self.invertCheck = QtGui.QCheckBox(Form)
+        self.invertCheck = QtWidgets.QCheckBox(Form)
         self.invertCheck.setObjectName(_fromUtf8("invertCheck"))
         self.gridLayout.addWidget(self.invertCheck, 5, 0, 1, 4)
-        self.mouseCheck = QtGui.QCheckBox(Form)
+        self.mouseCheck = QtWidgets.QCheckBox(Form)
         self.mouseCheck.setChecked(True)
         self.mouseCheck.setObjectName(_fromUtf8("mouseCheck"))
         self.gridLayout.addWidget(self.mouseCheck, 6, 0, 1, 4)
-        self.visibleOnlyCheck = QtGui.QCheckBox(Form)
+        self.visibleOnlyCheck = QtWidgets.QCheckBox(Form)
         self.visibleOnlyCheck.setObjectName(_fromUtf8("visibleOnlyCheck"))
         self.gridLayout.addWidget(self.visibleOnlyCheck, 3, 2, 1, 2)
-        self.autoPanCheck = QtGui.QCheckBox(Form)
+        self.autoPanCheck = QtWidgets.QCheckBox(Form)
         self.autoPanCheck.setObjectName(_fromUtf8("autoPanCheck"))
         self.gridLayout.addWidget(self.autoPanCheck, 4, 2, 1, 2)
 

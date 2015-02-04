@@ -1,9 +1,9 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .. import functions as fn
 import numpy as np
 __all__ = ['ArrowItem']
 
-class ArrowItem(QtGui.QGraphicsPathItem):
+class ArrowItem(QtWidgets.QGraphicsPathItem):
     """
     For displaying scale-invariant arrows.
     For arrows pointing to a location on a curve, see CurveArrow
@@ -17,7 +17,7 @@ class ArrowItem(QtGui.QGraphicsPathItem):
         the setStyle() method.
         """
         self.opts = {}
-        QtGui.QGraphicsPathItem.__init__(self, opts.get('parent', None))
+        QtWidgets.QGraphicsPathItem.__init__(self, opts.get('parent', None))
 
         if 'size' in opts:
             opts['headLen'] = opts['size']
@@ -39,7 +39,7 @@ class ArrowItem(QtGui.QGraphicsPathItem):
         
         self.setStyle(**defaultOpts)
         
-        self.rotate(self.opts['angle'])
+        self.setRotation(self.opts['angle'])
         self.moveBy(*self.opts['pos'])
     
     def setStyle(self, **opts):
@@ -85,7 +85,7 @@ class ArrowItem(QtGui.QGraphicsPathItem):
         
     def paint(self, p, *args):
         p.setRenderHint(QtGui.QPainter.Antialiasing)
-        QtGui.QGraphicsPathItem.paint(self, p, *args)
+        QtWidgets.QGraphicsPathItem.paint(self, p, *args)
         
         #p.setPen(fn.mkPen('r'))
         #p.setBrush(fn.mkBrush(None))

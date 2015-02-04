@@ -1,4 +1,4 @@
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .PlotWidget import PlotWidget
 from .DataFilterWidget import DataFilterParameter
 from .ColorMapWidget import ColorMapParameter
@@ -11,7 +11,7 @@ from ..pgcollections import OrderedDict
 
 __all__ = ['ScatterPlotWidget']
 
-class ScatterPlotWidget(QtGui.QSplitter):
+class ScatterPlotWidget(QtWidgets.QSplitter):
     """
     Given a record array, display a scatter plot of a specific set of data.
     This widget includes controls for selecting the columns to plot,
@@ -33,10 +33,10 @@ class ScatterPlotWidget(QtGui.QSplitter):
     4) A PlotWidget for displaying the data.
     """
     def __init__(self, parent=None):
-        QtGui.QSplitter.__init__(self, QtCore.Qt.Horizontal)
-        self.ctrlPanel = QtGui.QSplitter(QtCore.Qt.Vertical)
+        QtWidgets.QSplitter.__init__(self, QtCore.Qt.Horizontal)
+        self.ctrlPanel = QtWidgets.QSplitter(QtCore.Qt.Vertical)
         self.addWidget(self.ctrlPanel)
-        self.fieldList = QtGui.QListWidget()
+        self.fieldList = QtWidgets.QListWidget()
         self.fieldList.setSelectionMode(self.fieldList.ExtendedSelection)
         self.ptree = ptree.ParameterTree(showHeader=False)
         self.filter = DataFilterParameter()
@@ -75,7 +75,7 @@ class ScatterPlotWidget(QtGui.QSplitter):
         self.mouseOverField = mouseOverField
         self.fieldList.clear()
         for f,opts in fields:
-            item = QtGui.QListWidgetItem(f)
+            item = QtWidgets.QListWidgetItem(f)
             item.opts = opts
             item = self.fieldList.addItem(item)
         self.filter.setFields(fields)

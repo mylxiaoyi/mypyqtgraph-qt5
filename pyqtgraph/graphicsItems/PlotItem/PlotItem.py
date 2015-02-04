@@ -16,7 +16,7 @@ This class is very heavily featured:
   - Control panel with a huge feature set including averaging, decimation,
     display, power spectrum, svg/png export, plot linking, and more.
 """
-from ...Qt import QtGui, QtCore, QtSvg, USE_PYSIDE
+from ...Qt import QtGui, QtCore, QtWidgets, QtSvg, USE_PYSIDE
 from ... import pixmaps
 import sys
 
@@ -125,7 +125,7 @@ class PlotItem(GraphicsWidget):
         
         GraphicsWidget.__init__(self, parent)
         
-        self.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         
         ## Set up control buttons
         path = os.path.dirname(__file__)
@@ -138,7 +138,7 @@ class PlotItem(GraphicsWidget):
         self.buttonsHidden = False ## whether the user has requested buttons to be hidden
         self.mouseHovering = False
         
-        self.layout = QtGui.QGraphicsGridLayout()
+        self.layout = QtWidgets.QGraphicsGridLayout()
         self.layout.setContentsMargins(1,1,1,1)
         self.setLayout(self.layout)
         self.layout.setHorizontalSpacing(0)
@@ -204,7 +204,7 @@ class PlotItem(GraphicsWidget):
         
         ### Set up context menu
         
-        w = QtGui.QWidget()
+        w = QtWidgets.QWidget()
         self.ctrl = c = Ui_Form()
         c.setupUi(w)
         dv = QtGui.QDoubleValidator(self)
@@ -219,13 +219,13 @@ class PlotItem(GraphicsWidget):
         ]
         
         
-        self.ctrlMenu = QtGui.QMenu()
+        self.ctrlMenu = QtWidgets.QMenu()
         
         self.ctrlMenu.setTitle('Plot Options')
         self.subMenus = []
         for name, grp in menuItems:
-            sm = QtGui.QMenu(name)
-            act = QtGui.QWidgetAction(self)
+            sm = QtWidgets.QMenu(name)
+            act = QtWidgets.QWidgetAction(self)
             act.setDefaultWidget(grp)
             sm.addAction(act)
             self.subMenus.append(sm)
@@ -674,7 +674,7 @@ class PlotItem(GraphicsWidget):
                 ## If the parameter is not in the list, add it.
                 matches = self.ctrl.avgParamList.findItems(p, QtCore.Qt.MatchExactly)
                 if len(matches) == 0:
-                    i = QtGui.QListWidgetItem(p)
+                    i = QtWidgets.QListWidgetItem(p)
                     if p in self.paramList and self.paramList[p] is True:
                         i.setCheckState(QtCore.Qt.Checked)
                     else:
@@ -692,8 +692,8 @@ class PlotItem(GraphicsWidget):
             self.fileDialog = FileDialog()
             if PlotItem.lastFileDir is not None:
                 self.fileDialog.setDirectory(PlotItem.lastFileDir)
-            self.fileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
-            self.fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave) 
+            self.fileDialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
+            self.fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptSave) 
             self.fileDialog.show()
             self.fileDialog.fileSelected.connect(self.writeSvg)
             return
@@ -783,7 +783,7 @@ class PlotItem(GraphicsWidget):
     
     def writeSvg(self, fileName=None):
         if fileName is None:
-            fileName = QtGui.QFileDialog.getSaveFileName()
+            fileName = QtWidgets.QFileDialog.getSaveFileName()
         fileName = str(fileName)
         PlotItem.lastFileDir = os.path.dirname(fileName)
         
@@ -829,8 +829,8 @@ class PlotItem(GraphicsWidget):
             self.fileDialog = FileDialog()
             if PlotItem.lastFileDir is not None:
                 self.fileDialog.setDirectory(PlotItem.lastFileDir)
-            self.fileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
-            self.fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave) 
+            self.fileDialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
+            self.fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptSave) 
             self.fileDialog.show()
             self.fileDialog.fileSelected.connect(self.writeImage)
             return
@@ -840,7 +840,7 @@ class PlotItem(GraphicsWidget):
             raise Exception("Not implemented yet..")
         fileName = str(fileName)
         PlotItem.lastFileDir = os.path.dirname(fileName)
-        self.png = QtGui.QImage(int(self.size().width()), int(self.size().height()), QtGui.QImage.Format_ARGB32)
+        self.png = QtWidgets.QImage(int(self.size().width()), int(self.size().height()), QtWidgets.QImage.Format_ARGB32)
         painter = QtGui.QPainter(self.png)
         painter.setRenderHints(painter.Antialiasing | painter.TextAntialiasing)
         self.scene().render(painter, QtCore.QRectF(), self.mapRectToScene(self.boundingRect()))
@@ -852,8 +852,8 @@ class PlotItem(GraphicsWidget):
             self.fileDialog = FileDialog()
             if PlotItem.lastFileDir is not None:
                 self.fileDialog.setDirectory(PlotItem.lastFileDir)
-            self.fileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
-            self.fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave) 
+            self.fileDialog.setFileMode(QtWidgets.QFileDialog.AnyFile)
+            self.fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptSave) 
             self.fileDialog.show()
             self.fileDialog.fileSelected.connect(self.writeCsv)
             return
