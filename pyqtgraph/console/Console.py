@@ -1,5 +1,5 @@
 
-from ..Qt import QtCore, QtGui, USE_PYSIDE
+from ..Qt import QtCore, QtGui, QtWidgets, USE_PYSIDE
 import sys, re, os, time, traceback, subprocess
 if USE_PYSIDE:
     from . import template_pyside as template
@@ -10,7 +10,7 @@ from .. import exceptionHandling as exceptionHandling
 import pickle
 from .. import getConfigOption
 
-class ConsoleWidget(QtGui.QWidget):
+class ConsoleWidget(QtWidgets.QWidget):
     """
     Widget displaying console output and accepting command input.
     Implements:
@@ -42,7 +42,7 @@ class ConsoleWidget(QtGui.QWidget):
                             editorCommand --loadfile {fileName} --gotoline {lineNum}
         ==============  =============================================================================
         """
-        QtGui.QWidget.__init__(self, parent)
+        QtWidgets.QWidget.__init__(self, parent)
         if namespace is None:
             namespace = {}
         self.localNamespace = namespace
@@ -198,7 +198,7 @@ class ConsoleWidget(QtGui.QWidget):
             self.multiline = None
 
     def write(self, strn, html=False):
-        self.output.moveCursor(QtGui.QTextCursor.End)
+        self.output.moveCursor(QtWidgets.QTextCursor.End)
         if html:
             self.output.textCursor().insertHtml(strn)
         else:
