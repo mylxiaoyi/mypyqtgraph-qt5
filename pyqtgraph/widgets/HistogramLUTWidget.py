@@ -3,7 +3,7 @@ Widget displaying an image histogram along with gradient editor. Can be used to 
 This is a wrapper around HistogramLUTItem
 """
 
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .GraphicsView import GraphicsView
 from ..graphicsItems.HistogramLUTItem import HistogramLUTItem
 
@@ -17,7 +17,7 @@ class HistogramLUTWidget(GraphicsView):
         GraphicsView.__init__(self, parent, useOpenGL=False, background=background)
         self.item = HistogramLUTItem(*args, **kargs)
         self.setCentralItem(self.item)
-        self.setSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Expanding)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Expanding)
         self.setMinimumWidth(95)
         
 

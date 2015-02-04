@@ -23,4 +23,4 @@ pg.image(data, title="Simplest possible image example")
 if __name__ == '__main__':
     import sys
     if sys.flags.interactive != 1 or not hasattr(QtCore, 'PYQT_VERSION'):
-        pg.QtGui.QApplication.exec_()
+        pg.QtWidgets.QApplication.exec_()

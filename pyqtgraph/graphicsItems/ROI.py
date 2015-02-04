@@ -180,7 +180,7 @@ class ROI(GraphicsObject):
         self.setAngle(state['angle'], update=update)
     
     def setZValue(self, z):
-        QtGui.QGraphicsItem.setZValue(self, z)
+        QtWidgets.QGraphicsItem.setZValue(self, z)
         for h in self.handles:
             h['item'].setZValue(z+1)
         
@@ -228,7 +228,7 @@ class ROI(GraphicsObject):
         
         pos = Point(pos)
         self.state['pos'] = pos
-        QtGui.QGraphicsItem.setPos(self, pos)
+        QtWidgets.QGraphicsItem.setPos(self, pos)
         if update:
             self.stateChanged(finish=finish)
         
@@ -600,7 +600,7 @@ class ROI(GraphicsObject):
         return self.mapToParent(self.mapFromScene(pt))
 
     def setSelected(self, s):
-        QtGui.QGraphicsItem.setSelected(self, s)
+        QtWidgets.QGraphicsItem.setSelected(self, s)
         #print "select", self, s
         if s:
             for h in self.handles:
@@ -655,9 +655,9 @@ class ROI(GraphicsObject):
 
     def getMenu(self):
         if self.menu is None:
-            self.menu = QtGui.QMenu()
+            self.menu = QtWidgets.QMenu()
             self.menu.setTitle("ROI")
-            remAct = QtGui.QAction("Remove ROI", self.menu)
+            remAct = QtWidgets.QAction("Remove ROI", self.menu)
             remAct.triggered.connect(self.removeClicked)
             self.menu.addAction(remAct)
             self.menu.remAct = remAct
@@ -1294,7 +1294,7 @@ class Handle(UIGraphicsItem):
                 #ev.ignore()
                 
     def buildMenu(self):
-        menu = QtGui.QMenu()
+        menu = QtWidgets.QMenu()
         menu.setTitle("Handle")
         self.removeAction = menu.addAction("Remove handle", self.removeClicked) 
         return menu

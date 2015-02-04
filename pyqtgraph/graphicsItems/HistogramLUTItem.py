@@ -3,7 +3,7 @@ GraphicsWidget displaying an image histogram along with gradient editor. Can be 
 """
 
 
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .. import functions as fn
 from .GraphicsWidget import GraphicsWidget
 from .ViewBox import *
@@ -45,7 +45,7 @@ class HistogramLUTItem(GraphicsWidget):
         self.lut = None
         self.imageItem = lambda: None  # fake a dead weakref
         
-        self.layout = QtGui.QGraphicsGridLayout()
+        self.layout = QtWidgets.QGraphicsGridLayout()
         self.setLayout(self.layout)
         self.layout.setContentsMargins(1,1,1,1)
         self.layout.setSpacing(0)
@@ -75,7 +75,7 @@ class HistogramLUTItem(GraphicsWidget):
         self.region.sigRegionChangeFinished.connect(self.regionChanged)
         self.vb.sigRangeChanged.connect(self.viewRangeChanged)
         self.plot = PlotDataItem()
-        self.plot.rotate(90)
+        self.plot.setRotation(90)
         self.fillHistogram(fillHistogram)
             
         self.vb.addItem(self.plot)

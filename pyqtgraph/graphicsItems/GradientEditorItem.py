@@ -124,13 +124,14 @@ class TickSliderItem(GraphicsWidget):
             self.scale(1, -1)
             self.translate(-self.height(), -self.maxDim)
         elif ort == 'right':
-            self.rotate(270)
-            self.translate(-self.height(), 0)
+            self.setRotation(270)
+            self.moveBy(-self.height(), 0)
             #self.setPos(0, -self.height())
         elif ort != 'bottom':
             raise Exception("%s is not a valid orientation. Options are 'left', 'right', 'top', and 'bottom'" %str(ort))
         
-        self.translate(self.tickSize/2., 0)
+        #self.translate(self.tickSize/2., 0)
+        self.moveBy(self.tickSize/2., 0)
     
     def addTick(self, x, color=None, movable=True):
         ## public
@@ -380,16 +381,16 @@ class GradientEditorItem(TickSliderItem):
         self.currentTick = None
         self.currentTickColor = None
         self.rectSize = 15
-        self.gradRect = QtGui.QGraphicsRectItem(QtCore.QRectF(0, self.rectSize, 100, self.rectSize))
-        self.backgroundRect = QtGui.QGraphicsRectItem(QtCore.QRectF(0, -self.rectSize, 100, self.rectSize))
+        self.gradRect = QtWidgets.QGraphicsRectItem(QtCore.QRectF(0, self.rectSize, 100, self.rectSize))
+        self.backgroundRect = QtWidgets.QGraphicsRectItem(QtCore.QRectF(0, -self.rectSize, 100, self.rectSize))
         self.backgroundRect.setBrush(QtGui.QBrush(QtCore.Qt.DiagCrossPattern))
         self.colorMode = 'rgb'
         
         TickSliderItem.__init__(self, *args, **kargs)
         
-        self.colorDialog = QtGui.QColorDialog()
-        self.colorDialog.setOption(QtGui.QColorDialog.ShowAlphaChannel, True)
-        self.colorDialog.setOption(QtGui.QColorDialog.DontUseNativeDialog, True)
+        self.colorDialog = QtWidgets.QColorDialog()
+        self.colorDialog.setOption(QtWidgets.QColorDialog.ShowAlphaChannel, True)
+        self.colorDialog.setOption(QtWidgets.QColorDialog.DontUseNativeDialog, True)
         
         self.colorDialog.currentColorChanged.connect(self.currentColorChanged)
         self.colorDialog.rejected.connect(self.currentColorRejected)
@@ -400,14 +401,14 @@ class GradientEditorItem(TickSliderItem):
         
         self.setMaxDim(self.rectSize + self.tickSize)
         
-        self.rgbAction = QtGui.QAction('RGB', self)
+        self.rgbAction = QtWidgets.QAction('RGB', self)
         self.rgbAction.setCheckable(True)
         self.rgbAction.triggered.connect(lambda: self.setColorMode('rgb'))
-        self.hsvAction = QtGui.QAction('HSV', self)
+        self.hsvAction = QtWidgets.QAction('HSV', self)
         self.hsvAction.setCheckable(True)
         self.hsvAction.triggered.connect(lambda: self.setColorMode('hsv'))
             
-        self.menu = QtGui.QMenu()
+        self.menu = QtWidgets.QMenu()
         
         ## build context menu of gradients
         l = self.length
@@ -421,10 +422,10 @@ class GradientEditorItem(TickSliderItem):
             brush = QtGui.QBrush(grad)
             p.fillRect(QtCore.QRect(0, 0, 100, 15), brush)
             p.end()
-            label = QtGui.QLabel()
+            label = QtWidgets.QLabel()
             label.setPixmap(px)
             label.setContentsMargins(1, 1, 1, 1)
-            act = QtGui.QWidgetAction(self)
+            act = QtWidgets.QWidgetAction(self)
             act.setDefaultWidget(label)
             act.triggered.connect(self.contextMenuClicked)
             act.name = g
@@ -456,7 +457,8 @@ class GradientEditorItem(TickSliderItem):
         ==============  ===================================================================
         """
         TickSliderItem.setOrientation(self, orientation)
-        self.translate(0, self.rectSize)
+        #self.translate(0, self.rectSize)
+        self.moveBy(0, self.rectSize)
     
     def showMenu(self, ev):
         #private
@@ -893,7 +895,7 @@ class TickMenu(QtWidgets.QMenu):
         #self.dataPosSpin = SpinBox(value=dataVal)
         #self.dataPosSpin.setOpts(decimals=3, siPrefix=True)
                 
-        l.addWidget(QtGui.QLabel("Position:"), 0,0)
+        l.addWidget(QtWidgets.QLabel("Position:"), 0,0)
         l.addWidget(self.fracPosSpin, 0, 1)
         #l.addWidget(QtGui.QLabel("Position (data units):"), 1, 0)
         #l.addWidget(self.dataPosSpin, 1,1)

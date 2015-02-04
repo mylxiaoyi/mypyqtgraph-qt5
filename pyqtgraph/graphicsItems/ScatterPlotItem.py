@@ -761,7 +761,8 @@ class ScatterPlotItem(GraphicsObject):
                 if USE_PYSIDE:
                     list(imap(p.drawPixmap, data['targetRect'], repeat(atlas), data['sourceRect']))
                 else:
-                    p.drawPixmapFragments(data['targetRect'].tolist(), data['sourceRect'].tolist(), atlas)
+                    #p.drawPixmapFragments(data['targetRect'].tolist(), data['sourceRect'].tolist(), atlas)
+                    p.drawPixmapFragments(data['sourceRect'].tolist(), atlas)
             else:
                 # render each symbol individually
                 p.setRenderHint(p.Antialiasing, aa)
