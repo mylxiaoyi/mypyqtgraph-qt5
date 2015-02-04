@@ -8,11 +8,11 @@ import initExample ## Add path to library (just for examples; you do not need th
 
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 
-app = QtGui.QApplication([])
-win = QtGui.QMainWindow()
+app = QtWidgets.QApplication([])
+win = QtWidgets.QMainWindow()
 btn = pg.ColorButton()
 win.setCentralWidget(btn)
 win.show()
@@ -30,4 +30,4 @@ btn.sigColorChanged.connect(done)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
