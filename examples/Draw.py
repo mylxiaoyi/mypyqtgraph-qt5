@@ -8,11 +8,11 @@ the mouse.
 import initExample ## Add path to library (just for examples; you do not need this)
 
 
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 import pyqtgraph as pg
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 ## Create window with GraphicsView widget
 w = pg.GraphicsView()
@@ -46,4 +46,4 @@ img.setLevels([0, 10])
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

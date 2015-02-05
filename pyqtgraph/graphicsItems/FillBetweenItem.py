@@ -46,7 +46,7 @@ class FillBetweenItem(QtWidgets.QGraphicsPathItem):
         
     def setBrush(self, *args, **kwds):
         """Change the fill brush. Acceps the same arguments as pg.mkBrush()"""
-        QtGui.QGraphicsPathItem.setBrush(self, fn.mkBrush(*args, **kwds))
+        QtWidgets.QGraphicsPathItem.setBrush(self, fn.mkBrush(*args, **kwds))
 
     def curveChanged(self):
         self.updatePath()
@@ -63,8 +63,8 @@ class FillBetweenItem(QtWidgets.QGraphicsPathItem):
                 paths.append(c.getPath())
             
         path = QtGui.QPainterPath()
-        p1 = paths[0].toSubpathPolygons()
-        p2 = paths[1].toReversed().toSubpathPolygons()
+        p1 = paths[0].toSubpathPolygons(QtGui.QTransform())
+        p2 = paths[1].toReversed().toSubpathPolygons(QtGui.QTransform())
         if len(p1) == 0 or len(p2) == 0:
             self.setPath(QtGui.QPainterPath())
             return
