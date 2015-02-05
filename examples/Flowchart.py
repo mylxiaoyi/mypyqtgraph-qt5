@@ -14,19 +14,19 @@ import initExample ## Add path to library (just for examples; you do not need th
 
 
 from pyqtgraph.flowchart import Flowchart
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 import numpy as np
 import pyqtgraph.metaarray as metaarray
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 ## Create main window with grid layout
-win = QtGui.QMainWindow()
+win = QtWidgets.QMainWindow()
 win.setWindowTitle('pyqtgraph example: Flowchart')
-cw = QtGui.QWidget()
+cw = QtWidgets.QWidget()
 win.setCentralWidget(cw)
-layout = QtGui.QGridLayout()
+layout = QtWidgets.QGridLayout()
 cw.setLayout(layout)
 
 ## Create flowchart, define input/output terminals
@@ -81,4 +81,4 @@ fc.connectTerminals(fNode['Out'], fc['dataOut'])
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
