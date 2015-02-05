@@ -16,3 +16,5 @@ pyqtgraph/metaarray/*.pyc
 pyqtgraph/console/*.pyc
 pyqtgraph/dockarea/*.pyc
 pyqtgraph/exporters/*.pyc
+pyqtgraph/flowchart/*.pyc
+pyqtgraph/flowchart/library/*.pyc

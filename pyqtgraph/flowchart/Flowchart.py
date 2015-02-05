@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtCore, QtGui, USE_PYSIDE
+from ..Qt import QtCore, QtGui, QtWidgets, USE_PYSIDE
 from .Node import *
 from ..pgcollections import OrderedDict
 from ..widgets.TreeWidget import *
@@ -528,7 +528,7 @@ class Flowchart(Node):
                 startDir = '.'
             self.fileDialog = FileDialog(None, "Save Flowchart..", startDir, "Flowchart (*.fc)")
             #self.fileDialog.setFileMode(QtGui.QFileDialog.AnyFile)
-            self.fileDialog.setAcceptMode(QtGui.QFileDialog.AcceptSave) 
+            self.fileDialog.setAcceptMode(QtWidgets.QFileDialog.AcceptSave) 
             #self.fileDialog.setDirectory(startDir)
             self.fileDialog.show()
             self.fileDialog.fileSelected.connect(self.saveFile)
@@ -594,14 +594,14 @@ class FlowchartGraphicsItem(GraphicsObject):
         #p.drawRect(self.boundingRect())
     
 
-class FlowchartCtrlWidget(QtGui.QWidget):
+class FlowchartCtrlWidget(QtWidgets.QWidget):
     """The widget that contains the list of all the nodes in a flowchart and their controls, as well as buttons for loading/saving flowcharts."""
     
     def __init__(self, chart):
         self.items = {}
         #self.loadDir = loadDir  ## where to look initially for chart files
         self.currentFileName = None
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.chart = chart
         self.ui = FlowchartCtrlTemplate.Ui_Form()
         self.ui.setupUi(self)
@@ -613,13 +613,13 @@ class FlowchartCtrlWidget(QtGui.QWidget):
         
         self.chartWidget = FlowchartWidget(chart, self)
         #self.chartWidget.viewBox().autoRange()
-        self.cwWin = QtGui.QMainWindow()
+        self.cwWin = QtWidgets.QMainWindow()
         self.cwWin.setWindowTitle('Flowchart')
         self.cwWin.setCentralWidget(self.chartWidget)
         self.cwWin.resize(1000,800)
         
         h = self.ui.ctrlList.header()
-        h.setResizeMode(0, h.Stretch)
+        h.setSectionResizeMode(0, h.Stretch)
         
         self.ui.ctrlList.itemChanged.connect(self.itemChanged)
         self.ui.loadBtn.clicked.connect(self.loadClicked)
@@ -708,9 +708,9 @@ class FlowchartCtrlWidget(QtGui.QWidget):
         ctrl = node.ctrlWidget()
         #if ctrl is None:
             #return
-        item = QtGui.QTreeWidgetItem([node.name(), '', ''])
+        item = QtWidgets.QTreeWidgetItem([node.name(), '', ''])
         self.ui.ctrlList.addTopLevelItem(item)
-        byp = QtGui.QPushButton('X')
+        byp = QtWidgets.QPushButton('X')
         byp.setCheckable(True)
         byp.setFixedWidth(20)
         item.bypassBtn = byp
@@ -721,7 +721,7 @@ class FlowchartCtrlWidget(QtGui.QWidget):
         byp.clicked.connect(self.bypassClicked)
         
         if ctrl is not None:
-            item2 = QtGui.QTreeWidgetItem()
+            item2 = QtWidgets.QTreeWidgetItem()
             item.addChild(item2)
             self.ui.ctrlList.setItemWidget(item2, 0, ctrl)
             
@@ -777,17 +777,17 @@ class FlowchartWidget(dockarea.DockArea):
         self.addDock(self.viewDock)
     
 
-        self.hoverText = QtGui.QTextEdit()
+        self.hoverText = QtWidgets.QTextEdit()
         self.hoverText.setReadOnly(True)
         self.hoverDock = dockarea.Dock('Hover Info', size=(1000,20))
         self.hoverDock.addWidget(self.hoverText)
         self.addDock(self.hoverDock, 'bottom')
 
-        self.selInfo = QtGui.QWidget()
-        self.selInfoLayout = QtGui.QGridLayout()
+        self.selInfo = QtWidgets.QWidget()
+        self.selInfoLayout = QtWidgets.QGridLayout()
         self.selInfo.setLayout(self.selInfoLayout)
-        self.selDescLabel = QtGui.QLabel()
-        self.selNameLabel = QtGui.QLabel()
+        self.selDescLabel = QtWidgets.QLabel()
+        self.selNameLabel = QtWidgets.QLabel()
         self.selDescLabel.setWordWrap(True)
         self.selectedTree = DataTreeWidget()
         #self.selectedTree.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAsNeeded)
@@ -825,7 +825,7 @@ class FlowchartWidget(dockarea.DockArea):
     def buildMenu(self, pos=None):
         def buildSubMenu(node, rootMenu, subMenus, pos=None):
             for section, node in node.items():
-                menu = QtGui.QMenu(section)
+                menu = QtWidgets.QMenu(section)
                 rootMenu.addMenu(menu)
                 if isinstance(node, OrderedDict): 
                     buildSubMenu(node, menu, subMenus, pos=pos)
@@ -834,7 +834,7 @@ class FlowchartWidget(dockarea.DockArea):
                     act = rootMenu.addAction(section)
                     act.nodeType = section
                     act.pos = pos
-        self.nodeMenu = QtGui.QMenu()
+        self.nodeMenu = QtWidgets.QMenu()
         self.subMenus = []       
         buildSubMenu(self.chart.library.getNodeTree(), self.nodeMenu, self.subMenus, pos=pos)
         self.nodeMenu.triggered.connect(self.nodeMenuTriggered)

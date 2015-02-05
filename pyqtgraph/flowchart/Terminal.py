@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtCore, QtGui
+from ..Qt import QtCore, QtGui, QtWidgets
 import weakref
 from ..graphicsItems.GraphicsObject import GraphicsObject
 from .. import functions as fn
@@ -326,9 +326,9 @@ class TerminalGraphicsItem(GraphicsObject):
         #QtGui.QGraphicsItem.__init__(self, parent)
         GraphicsObject.__init__(self, parent)
         self.brush = fn.mkBrush(0,0,0)
-        self.box = QtGui.QGraphicsRectItem(0, 0, 10, 10, self)
-        self.label = QtGui.QGraphicsTextItem(self.term.name(), self)
-        self.label.scale(0.7, 0.7)
+        self.box = QtWidgets.QGraphicsRectItem(0, 0, 10, 10, self)
+        self.label = QtWidgets.QGraphicsTextItem(self.term.name(), self)
+        self.label.setScale(0.7)
         #self.setAcceptHoverEvents(True)
         self.newConnection = None
         self.setFiltersChildEvents(True)  ## to pick up mouse events on the rectitem
@@ -341,14 +341,14 @@ class TerminalGraphicsItem(GraphicsObject):
             
 
     def labelFocusOut(self, ev):
-        QtGui.QGraphicsTextItem.focusOutEvent(self.label, ev)
+        QtWidgets.QGraphicsTextItem.focusOutEvent(self.label, ev)
         self.labelChanged()
         
     def labelKeyPress(self, ev):
         if ev.key() == QtCore.Qt.Key_Enter or ev.key() == QtCore.Qt.Key_Return:
             self.labelChanged()
         else:
-            QtGui.QGraphicsTextItem.keyPressEvent(self.label, ev)
+            QtWidgets.QGraphicsTextItem.keyPressEvent(self.label, ev)
         
     def labelChanged(self):
         newName = str(self.label.toPlainText())
@@ -413,15 +413,15 @@ class TerminalGraphicsItem(GraphicsObject):
         
     def getMenu(self):
         if self.menu is None:
-            self.menu = QtGui.QMenu()
+            self.menu = QtWidgets.QMenu()
             self.menu.setTitle("Terminal")
-            remAct = QtGui.QAction("Remove terminal", self.menu)
+            remAct = QtWidgets.QAction("Remove terminal", self.menu)
             remAct.triggered.connect(self.removeSelf)
             self.menu.addAction(remAct)
             self.menu.remAct = remAct
             if not self.term.isRemovable():
                 remAct.setEnabled(False)
-            multiAct = QtGui.QAction("Multi-value", self.menu)
+            multiAct = QtWidgets.QAction("Multi-value", self.menu)
             multiAct.setCheckable(True)
             multiAct.setChecked(self.term.isMultiValue())
             multiAct.setEnabled(self.term.isMultiable())

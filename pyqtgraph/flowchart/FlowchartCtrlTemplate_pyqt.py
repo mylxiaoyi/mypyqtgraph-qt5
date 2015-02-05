@@ -7,7 +7,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -16,22 +16,22 @@ except AttributeError:
         return s
 
 try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
+    _encoding = QtWidgets.QApplication.UnicodeUTF8
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
+        return QtWidgets.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+        return QtWidgets.QApplication.translate(context, text, disambig)
 
 class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
         Form.resize(217, 499)
-        self.gridLayout = QtGui.QGridLayout(Form)
-        self.gridLayout.setMargin(0)
+        self.gridLayout = QtWidgets.QGridLayout(Form)
+        self.gridLayout.setContentsMargins(0,0,0,0)
         self.gridLayout.setVerticalSpacing(0)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.loadBtn = QtGui.QPushButton(Form)
+        self.loadBtn = QtWidgets.QPushButton(Form)
         self.loadBtn.setObjectName(_fromUtf8("loadBtn"))
         self.gridLayout.addWidget(self.loadBtn, 1, 0, 1, 1)
         self.saveBtn = FeedbackButton(Form)
@@ -45,7 +45,7 @@ class Ui_Form(object):
         self.reloadBtn.setFlat(False)
         self.reloadBtn.setObjectName(_fromUtf8("reloadBtn"))
         self.gridLayout.addWidget(self.reloadBtn, 4, 0, 1, 2)
-        self.showChartBtn = QtGui.QPushButton(Form)
+        self.showChartBtn = QtWidgets.QPushButton(Form)
         self.showChartBtn.setCheckable(True)
         self.showChartBtn.setObjectName(_fromUtf8("showChartBtn"))
         self.gridLayout.addWidget(self.showChartBtn, 4, 2, 1, 2)
@@ -55,7 +55,7 @@ class Ui_Form(object):
         self.ctrlList.header().setVisible(False)
         self.ctrlList.header().setStretchLastSection(False)
         self.gridLayout.addWidget(self.ctrlList, 3, 0, 1, 4)
-        self.fileNameLabel = QtGui.QLabel(Form)
+        self.fileNameLabel = QtWidgets.QLabel(Form)
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)

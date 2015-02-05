@@ -9,18 +9,18 @@ import initExample ## Add path to library (just for examples; you do not need th
 from pyqtgraph.flowchart import Flowchart, Node
 import pyqtgraph.flowchart.library as fclib
 from pyqtgraph.flowchart.library.common import CtrlNode
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 import numpy as np
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 ## Create main window with a grid layout inside
-win = QtGui.QMainWindow()
+win = QtWidgets.QMainWindow()
 win.setWindowTitle('pyqtgraph example: FlowchartCustomNode')
-cw = QtGui.QWidget()
+cw = QtWidgets.QWidget()
 win.setCentralWidget(cw)
-layout = QtGui.QGridLayout()
+layout = QtWidgets.QGridLayout()
 cw.setLayout(layout)
 
 ## Create an empty flowchart with a single input and output
@@ -156,4 +156,4 @@ fc.connectTerminals(fNode['dataOut'], fc['dataOut'])
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
