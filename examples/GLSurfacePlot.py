@@ -7,13 +7,13 @@ This example demonstrates the use of GLSurfacePlotItem.
 ## Add path to library (just for examples; you do not need this)
 import initExample
 
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import pyqtgraph as pg
 import pyqtgraph.opengl as gl
 import numpy as np
 
 ## Create a GL View widget to display data
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 w = gl.GLViewWidget()
 w.show()
 w.setWindowTitle('pyqtgraph example: GLSurfacePlot')
@@ -96,4 +96,4 @@ timer.start(30)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

@@ -6,10 +6,10 @@ Very basic 3D graphics example; create a view widget and add a few items.
 ## Add path to library (just for examples; you do not need this)
 import initExample
 
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import pyqtgraph.opengl as gl
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 w = gl.GLViewWidget()
 w.opts['distance'] = 20
 w.show()
@@ -31,4 +31,4 @@ b.translate(1,1,1)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

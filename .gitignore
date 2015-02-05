@@ -18,3 +18,5 @@ pyqtgraph/dockarea/*.pyc
 pyqtgraph/exporters/*.pyc
 pyqtgraph/flowchart/*.pyc
 pyqtgraph/flowchart/library/*.pyc
+pyqtgraph/opengl/*.pyc
+pyqtgraph/opengl/items/*.pyc

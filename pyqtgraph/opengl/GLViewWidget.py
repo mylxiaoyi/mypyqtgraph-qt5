@@ -325,9 +325,9 @@ class GLViewWidget(QtOpenGL.QGLWidget):
         
     def wheelEvent(self, ev):
         if (ev.modifiers() & QtCore.Qt.ControlModifier):
-            self.opts['fov'] *= 0.999**ev.delta()
+            self.opts['fov'] *= 0.999**ev.angleDelta().y()
         else:
-            self.opts['distance'] *= 0.999**ev.delta()
+            self.opts['distance'] *= 0.999**ev.angleDelta().y()
         self.update()
 
     def keyPressEvent(self, ev):

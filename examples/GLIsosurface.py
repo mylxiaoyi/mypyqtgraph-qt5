@@ -7,11 +7,11 @@ This example uses the isosurface function to convert a scalar field
 ## Add path to library (just for examples; you do not need this)
 import initExample
 
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import pyqtgraph as pg
 import pyqtgraph.opengl as gl
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 w = gl.GLViewWidget()
 w.show()
 w.setWindowTitle('pyqtgraph example: GLIsosurface')
@@ -72,4 +72,4 @@ m2.translate(-25, -25, -50)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
