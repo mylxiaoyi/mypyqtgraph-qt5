@@ -1,4 +1,4 @@
-from ..Qt import QtCore, QtGui
+from ..Qt import QtCore, QtGui, QtWidgets
 from ..Point import Point
 from .UIGraphicsItem import *
 from .. import functions as fn
@@ -30,7 +30,7 @@ class TextItem(UIGraphicsItem):
         self.anchor = Point(anchor)
         #self.angle = 0
         UIGraphicsItem.__init__(self)
-        self.textItem = QtGui.QGraphicsTextItem()
+        self.textItem = QtWidgets.QGraphicsTextItem()
         self.textItem.setParentItem(self)
         self.lastTransform = None
         self._bounds = QtCore.QRectF()
@@ -40,7 +40,7 @@ class TextItem(UIGraphicsItem):
             self.setHtml(html)
         self.fill = fn.mkBrush(fill)
         self.border = fn.mkPen(border)
-        self.rotate(angle)
+        self.setRotation(angle)
         self.setFlag(self.ItemIgnoresTransformations)  ## This is required to keep the text unscaled inside the viewport
 
     def setText(self, text, color=(200,200,200)):
