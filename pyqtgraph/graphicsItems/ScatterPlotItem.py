@@ -761,8 +761,16 @@ class ScatterPlotItem(GraphicsObject):
                 if USE_PYSIDE:
                     list(imap(p.drawPixmap, data['targetRect'], repeat(atlas), data['sourceRect']))
                 else:
+                    targetRectList = data['targetRect'].tolist()
+                    sourceRectList = data['sourceRect'].tolist()
+                    framgmentsList = []
+                    i = 0
+                    while i < len(targetRectList):
+                        framgment = QtGui.QPainter.PixmapFragment.create(targetRectList[i].center(), sourceRectList[i])
+                        framgmentsList.append(framgment)
+                        i += 1
                     #p.drawPixmapFragments(data['targetRect'].tolist(), data['sourceRect'].tolist(), atlas)
-                    p.drawPixmapFragments(data['sourceRect'].tolist(), atlas)
+                    p.drawPixmapFragments(framgmentsList, atlas)
             else:
                 # render each symbol individually
                 p.setRenderHint(p.Antialiasing, aa)

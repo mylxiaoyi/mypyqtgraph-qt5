@@ -1336,7 +1336,9 @@ class ViewBox(GraphicsWidget):
         r = self.childGroup.mapRectFromParent(r)
         self.rbScaleBox.setPos(r.topLeft())
         self.rbScaleBox.resetTransform()
-        self.rbScaleBox.scale(r.width(), r.height())
+        #self.rbScaleBox.scale(r.width(), r.height())
+        self.rbScaleBox.setScale(r.width())
+        self.rbScaleBox.setScale(r.height())
         self.rbScaleBox.show()
 
     def showAxRect(self, ax):
