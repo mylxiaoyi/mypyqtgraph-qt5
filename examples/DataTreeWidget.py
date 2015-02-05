@@ -7,11 +7,11 @@ Simple use of DataTreeWidget to display a structure of nested dicts, lists, and 
 import initExample ## Add path to library (just for examples; you do not need this)
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 d = {
     'list1': [1,2,3,4,5,6, {'nested1': 'aaaaa', 'nested2': 'bbbbb'}, "seven"],
     'dict1': {
@@ -32,4 +32,4 @@ tree.resize(600,600)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
