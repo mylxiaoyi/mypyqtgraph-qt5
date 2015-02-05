@@ -15,7 +15,7 @@ class TreeWidget(QtWidgets.QTreeWidget):
         #self.itemWidgets = WeakKeyDictionary()
         self.setAcceptDrops(True)
         self.setDragEnabled(True)
-        self.setEditTriggers(QtGui.QAbstractItemView.EditKeyPressed|QtGui.QAbstractItemView.SelectedClicked)
+        self.setEditTriggers(QtWidgets.QAbstractItemView.EditKeyPressed|QtWidgets.QAbstractItemView.SelectedClicked)
         self.placeholders = []
         self.childNestingLimit = None
 

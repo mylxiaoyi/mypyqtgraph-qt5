@@ -111,6 +111,7 @@ class WidgetGroup(QtCore.QObject):
     }
     
     sigChanged = QtCore.Signal(str, object)
+    changed = QtCore.pyqtSignal(str, object)
     
     
     def __init__(self, widgetList=None):
@@ -219,7 +220,8 @@ class WidgetGroup(QtCore.QObject):
         v2 = self.readWidget(w)
         if v1 != v2:
             #print "widget", n, " = ", v2
-            self.emit(QtCore.SIGNAL('changed'), self.widgetList[w], v2)
+            #self.emit(QtCore.SIGNAL('changed'), self.widgetList[w], v2)
+            self.changed.emit(self.widgetList[w], v2)
             self.sigChanged.emit(self.widgetList[w], v2)
         
     def state(self):

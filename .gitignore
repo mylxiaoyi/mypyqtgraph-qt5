@@ -15,3 +15,4 @@ pyqtgraph/graphicsItems/PlotItem/*.pyc
 pyqtgraph/metaarray/*.pyc
 pyqtgraph/console/*.pyc
 pyqtgraph/dockarea/*.pyc
+pyqtgraph/exporters/*.pyc

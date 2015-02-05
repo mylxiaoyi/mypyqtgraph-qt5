@@ -1,4 +1,4 @@
-from ..Qt import QtCore, QtGui, USE_PYSIDE
+from ..Qt import QtCore, QtGui, QtWidgets, USE_PYSIDE
 from .. import exporters as exporters
 from .. import functions as fn
 from ..graphicsItems.ViewBox import ViewBox
@@ -10,16 +10,16 @@ else:
     from . import exportDialogTemplate_pyqt as exportDialogTemplate
 
 
-class ExportDialog(QtGui.QWidget):
+class ExportDialog(QtWidgets.QWidget):
     def __init__(self, scene):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         self.setVisible(False)
         self.setWindowTitle("Export")
         self.shown = False
         self.currentExporter = None
         self.scene = scene
             
-        self.selectBox = QtGui.QGraphicsRectItem()
+        self.selectBox = QtWidgets.QGraphicsRectItem()
         self.selectBox.setPen(fn.mkPen('y', width=3, style=QtCore.Qt.DashLine))
         self.selectBox.hide()
         self.scene.addItem(self.selectBox)
@@ -55,7 +55,7 @@ class ExportDialog(QtGui.QWidget):
         
     def updateItemList(self, select=None):
         self.ui.itemTree.clear()
-        si = QtGui.QTreeWidgetItem(["Entire Scene"])
+        si = QtWidgets.QTreeWidgetItem(["Entire Scene"])
         si.gitem = self.scene
         self.ui.itemTree.addTopLevelItem(si)
         self.ui.itemTree.setCurrentItem(si)
@@ -67,9 +67,9 @@ class ExportDialog(QtGui.QWidget):
     def updateItemTree(self, item, treeItem, select=None):
         si = None
         if isinstance(item, ViewBox):
-            si = QtGui.QTreeWidgetItem(['ViewBox'])
+            si = QtWidgets.QTreeWidgetItem(['ViewBox'])
         elif isinstance(item, PlotItem):
-            si = QtGui.QTreeWidgetItem(['Plot'])
+            si = QtWidgets.QTreeWidgetItem(['Plot'])
             
         if si is not None:
             si.gitem = item
