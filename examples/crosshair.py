@@ -8,11 +8,11 @@ the mouse.
 import initExample ## Add path to library (just for examples; you do not need this)
 import numpy as np
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 from pyqtgraph.Point import Point
 
 #generate layout
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 win = pg.GraphicsWindow()
 win.setWindowTitle('pyqtgraph example: crosshair')
 label = pg.LabelItem(justify='right')
@@ -84,4 +84,4 @@ proxy = pg.SignalProxy(p1.scene().sigMouseMoved, rateLimit=60, slot=mouseMoved)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
