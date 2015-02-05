@@ -37,7 +37,7 @@ class ParameterItem(QtWidgets.QTreeWidgetItem):
         opts = param.opts
         
         ## Generate context menu for renaming/removing parameter
-        self.contextMenu = QtGui.QMenu()
+        self.contextMenu = QtWidgets.QMenu()
         self.contextMenu.addSeparator()
         flags = QtCore.Qt.ItemIsSelectable | QtCore.Qt.ItemIsEnabled
         if opts.get('renamable', False):

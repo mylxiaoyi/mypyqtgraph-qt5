@@ -1,6 +1,6 @@
 from .Exporter import Exporter
 from ..parametertree import Parameter
-from ..Qt import QtGui, QtCore, QtSvg, USE_PYSIDE
+from ..Qt import QtGui, QtCore, QtWidgets, QtSvg, USE_PYSIDE
 from .. import functions as fn
 import numpy as np
 
@@ -13,7 +13,7 @@ class ImageExporter(Exporter):
     def __init__(self, item):
         Exporter.__init__(self, item)
         tr = self.getTargetRect()
-        if isinstance(item, QtGui.QGraphicsItem):
+        if isinstance(item, QtWidgets.QGraphicsItem):
             scene = item.scene()
         else:
             scene = item
@@ -92,7 +92,7 @@ class ImageExporter(Exporter):
         painter.end()
         
         if copy:
-            QtGui.QApplication.clipboard().setImage(self.png)
+            QtWidgets.QApplication.clipboard().setImage(self.png)
         elif toBytes:
             return self.png
         else:

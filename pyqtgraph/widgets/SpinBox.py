@@ -72,13 +72,13 @@ class SpinBox(QtWidgets.QAbstractSpinBox):
         decimals       (int) Number of decimal values to display. Default is 2. 
         ============== ========================================================================
         """
-        QtGui.QAbstractSpinBox.__init__(self, parent)
+        QtWidgets.QAbstractSpinBox.__init__(self, parent)
         self.lastValEmitted = None
         self.lastText = ''
         self.textValid = True  ## If false, we draw a red border
         self.setMinimumWidth(0)
         self.setMaximumHeight(20)
-        self.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Preferred)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Preferred)
         self.opts = {
             'bounds': [None, None],
             
@@ -131,7 +131,7 @@ class SpinBox(QtWidgets.QAbstractSpinBox):
         self.proxy = SignalProxy(self.sigValueChanging, slot=self.delayedChange, delay=self.opts['delay'])
         
     def event(self, ev):
-        ret = QtGui.QAbstractSpinBox.event(self, ev)
+        ret = QtWidgets.QAbstractSpinBox.event(self, ev)
         if ev.type() == QtCore.QEvent.KeyPress and ev.key() == QtCore.Qt.Key_Return:
             ret = True  ## For some reason, spinbox pretends to ignore return key press
         return ret
@@ -442,7 +442,7 @@ class SpinBox(QtWidgets.QAbstractSpinBox):
             return (ret, strn, pos)
         
     def paintEvent(self, ev):
-        QtGui.QAbstractSpinBox.paintEvent(self, ev)
+        QtWidgets.QAbstractSpinBox.paintEvent(self, ev)
         
         ## draw red border if text is invalid
         if not self.textValid:
