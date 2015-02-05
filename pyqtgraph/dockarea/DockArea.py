@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtCore, QtGui
+from ..Qt import QtCore, QtGui, QtWidgets
 from .Container import *
 from .DockDrop import *
 from .Dock import Dock
@@ -14,12 +14,12 @@ import weakref
 
 
 
-class DockArea(Container, QtGui.QWidget, DockDrop):
+class DockArea(Container, QtWidgets.QWidget, DockDrop):
     def __init__(self, temporary=False, home=None):
         Container.__init__(self, self)
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         DockDrop.__init__(self, allowedAreas=['left', 'right', 'top', 'bottom'])
-        self.layout = QtGui.QVBoxLayout()
+        self.layout = QtWidgets.QVBoxLayout()
         self.layout.setContentsMargins(0,0,0,0)
         self.layout.setSpacing(0)
         self.setLayout(self.layout)
@@ -171,7 +171,7 @@ class DockArea(Container, QtGui.QWidget, DockDrop):
         if self.home is None:
             area = DockArea(temporary=True, home=self)
             self.tempAreas.append(area)
-            win = QtGui.QMainWindow()
+            win = QtWidgets.QMainWindow()
             win.setCentralWidget(area)
             area.win = win
             win.show()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtCore, QtGui
+from ..Qt import QtCore, QtGui, QtWidgets
 import weakref
 
 class Container(object):
@@ -98,14 +98,14 @@ class Container(object):
         return self._stretch
             
 
-class SplitContainer(Container, QtGui.QSplitter):
+class SplitContainer(Container, QtWidgets.QSplitter):
     """Horizontal or vertical splitter with some changes:
      - save/restore works correctly
     """
     sigStretchChanged = QtCore.Signal()
     
     def __init__(self, area, orientation):
-        QtGui.QSplitter.__init__(self)
+        QtWidgets.QSplitter.__init__(self)
         self.setOrientation(orientation)
         Container.__init__(self, area)
         #self.splitterMoved.connect(self.restretchChildren)
@@ -127,7 +127,7 @@ class SplitContainer(Container, QtGui.QSplitter):
             self.setStretchFactor(i, sizes[i])
 
     def childEvent(self, ev):
-        QtGui.QSplitter.childEvent(self, ev)
+        QtWidgets.QSplitter.childEvent(self, ev)
         Container.childEvent(self, ev)
 
     #def restretchChildren(self):
@@ -198,24 +198,24 @@ class VContainer(SplitContainer):
         self.setSizes([int(s*scale) for s in sizes])
 
 
-class TContainer(Container, QtGui.QWidget):
+class TContainer(Container, QtWidgets.QWidget):
     sigStretchChanged = QtCore.Signal()
     def __init__(self, area):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         Container.__init__(self, area)
-        self.layout = QtGui.QGridLayout()
+        self.layout = QtWidgets.QGridLayout()
         self.layout.setSpacing(0)
         self.layout.setContentsMargins(0,0,0,0)
         self.setLayout(self.layout)
         
-        self.hTabLayout = QtGui.QHBoxLayout()
-        self.hTabBox = QtGui.QWidget()
+        self.hTabLayout = QtWidgets.QHBoxLayout()
+        self.hTabBox = QtWidgets.QWidget()
         self.hTabBox.setLayout(self.hTabLayout)
         self.hTabLayout.setSpacing(2)
         self.hTabLayout.setContentsMargins(0,0,0,0)
         self.layout.addWidget(self.hTabBox, 0, 1)
 
-        self.stack = QtGui.QStackedWidget()
+        self.stack = QtWidgets.QStackedWidget()
         self.layout.addWidget(self.stack, 1, 1)
         self.stack.childEvent = self.stackChildEvent
 
@@ -271,7 +271,7 @@ class TContainer(Container, QtGui.QWidget):
         self.setStretch(x, y)
         
     def stackChildEvent(self, ev):
-        QtGui.QStackedWidget.childEvent(self.stack, ev)
+        QtWidgets.QStackedWidget.childEvent(self.stack, ev)
         Container.childEvent(self, ev)
         
 from . import Dock

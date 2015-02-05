@@ -1,15 +1,15 @@
-from ..Qt import QtCore, QtGui
+from ..Qt import QtCore, QtGui, QtWidgets
 
 from .DockDrop import *
 from ..widgets.VerticalLabel import VerticalLabel
 from ..python2_3 import asUnicode
 
-class Dock(QtGui.QWidget, DockDrop):
+class Dock(QtWidgets.QWidget, DockDrop):
     
     sigStretchChanged = QtCore.Signal()
     
     def __init__(self, name, area=None, size=(10, 10), widget=None, hideTitle=False, autoOrientation=True, closable=False):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         DockDrop.__init__(self)
         self.area = area
         self.label = DockLabel(name, self, closable)
@@ -20,18 +20,18 @@ class Dock(QtGui.QWidget, DockDrop):
         self.autoOrient = autoOrientation
         self.orientation = 'horizontal'
         #self.label.setAlignment(QtCore.Qt.AlignHCenter)
-        self.topLayout = QtGui.QGridLayout()
+        self.topLayout = QtWidgets.QGridLayout()
         self.topLayout.setContentsMargins(0, 0, 0, 0)
         self.topLayout.setSpacing(0)
         self.setLayout(self.topLayout)
         self.topLayout.addWidget(self.label, 0, 1)
-        self.widgetArea = QtGui.QWidget()
+        self.widgetArea = QtWidgets.QWidget()
         self.topLayout.addWidget(self.widgetArea, 1, 1)
-        self.layout = QtGui.QGridLayout()
+        self.layout = QtWidgets.QGridLayout()
         self.layout.setContentsMargins(0, 0, 0, 0)
         self.layout.setSpacing(0)
         self.widgetArea.setLayout(self.layout)
-        self.widgetArea.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        self.widgetArea.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.widgets = []
         self.currentRow = 0
         #self.titlePos = 'top'
@@ -189,7 +189,7 @@ class Dock(QtGui.QWidget, DockDrop):
         
         
     def startDrag(self):
-        self.drag = QtGui.QDrag(self)
+        self.drag = QtWidgets.QDrag(self)
         mime = QtCore.QMimeData()
         #mime.setPlainText("asd")
         self.drag.setMimeData(mime)
@@ -259,9 +259,9 @@ class DockLabel(VerticalLabel):
 
         self.closeButton = None
         if showCloseButton:
-            self.closeButton = QtGui.QToolButton(self)
+            self.closeButton = QtWidgets.QToolButton(self)
             self.closeButton.clicked.connect(self.sigCloseClicked)
-            self.closeButton.setIcon(QtGui.QApplication.style().standardIcon(QtGui.QStyle.SP_TitleBarCloseButton))
+            self.closeButton.setIcon(QtWidgets.QApplication.style().standardIcon(QtWidgets.QStyle.SP_TitleBarCloseButton))
 
     def updateStyle(self):
         r = '3px'
@@ -319,7 +319,7 @@ class DockLabel(VerticalLabel):
             ev.accept()
         
     def mouseMoveEvent(self, ev):
-        if not self.startedDrag and (ev.pos() - self.pressPos).manhattanLength() > QtGui.QApplication.startDragDistance():
+        if not self.startedDrag and (ev.pos() - self.pressPos).manhattanLength() > QtWidgets.QApplication.startDragDistance():
             self.dock.startDrag()
         ev.accept()
             

@@ -11,7 +11,7 @@ displayed as well.
 import initExample ## Add path to library (just for examples; you do not need this)
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 
 win = pg.GraphicsWindow()
@@ -86,21 +86,21 @@ class MenuBox(pg.GraphicsObject):
     # a context menu that includes their parents' menus.
     def getContextMenus(self, event=None):
         if self.menu is None:
-            self.menu = QtGui.QMenu()
+            self.menu = QtWidgets.QMenu()
             self.menu.setTitle(self.name+ " options..")
             
-            green = QtGui.QAction("Turn green", self.menu)
+            green = QtWidgets.QAction("Turn green", self.menu)
             green.triggered.connect(self.setGreen)
             self.menu.addAction(green)
             self.menu.green = green
             
-            blue = QtGui.QAction("Turn blue", self.menu)
+            blue = QtWidgets.QAction("Turn blue", self.menu)
             blue.triggered.connect(self.setBlue)
             self.menu.addAction(blue)
             self.menu.green = blue
             
-            alpha = QtGui.QWidgetAction(self.menu)
-            alphaSlider = QtGui.QSlider()
+            alpha = QtWidgets.QWidgetAction(self.menu)
+            alphaSlider = QtWidgets.QSlider()
             alphaSlider.setOrientation(QtCore.Qt.Horizontal)
             alphaSlider.setMaximum(255)
             alphaSlider.setValue(255)
@@ -133,10 +133,10 @@ view.addItem(box1)
 box2 = MenuBox("Menu Box #2")
 box2.setParentItem(box1)
 box2.setPos(5, 5)
-box2.scale(0.2, 0.2)
+box2.setScale(0.2)
 
 ## Start Qt event loop unless running in interactive mode or using pyside.
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

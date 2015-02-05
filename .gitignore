@@ -14,3 +14,4 @@ pyqtgraph/GraphicsScene/*.pyc
 pyqtgraph/graphicsItems/PlotItem/*.pyc
 pyqtgraph/metaarray/*.pyc
 pyqtgraph/console/*.pyc
+pyqtgraph/dockarea/*.pyc
