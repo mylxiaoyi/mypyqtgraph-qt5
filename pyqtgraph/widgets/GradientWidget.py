@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .GraphicsView import GraphicsView
 from ..graphicsItems.GradientEditorItem import GradientEditorItem
 import weakref
@@ -40,7 +40,7 @@ class GradientWidget(GraphicsView):
         self.setOrientation(orientation)
         self.setCacheMode(self.CacheNone)
         self.setRenderHints(QtGui.QPainter.Antialiasing | QtGui.QPainter.TextAntialiasing)
-        self.setFrameStyle(QtGui.QFrame.NoFrame | QtGui.QFrame.Plain)
+        self.setFrameStyle(QtWidgets.QFrame.NoFrame | QtWidgets.QFrame.Plain)
         #self.setBackgroundRole(QtGui.QPalette.NoRole)
         #self.setBackgroundBrush(QtGui.QBrush(QtCore.Qt.NoBrush))
         #self.setAutoFillBackground(False)

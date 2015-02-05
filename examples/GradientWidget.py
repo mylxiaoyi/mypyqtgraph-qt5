@@ -7,20 +7,20 @@ Demonstrates the appearance / interactivity of GradientWidget
 import initExample ## Add path to library (just for examples; you do not need this)
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 
 
 
-app = QtGui.QApplication([])
-w = QtGui.QMainWindow()
+app = QtWidgets.QApplication([])
+w = QtWidgets.QMainWindow()
 w.show()
 w.setWindowTitle('pyqtgraph example: GradientWidget')
 w.resize(400,400)
-cw = QtGui.QWidget()
+cw = QtWidgets.QWidget()
 w.setCentralWidget(cw)
 
-l = QtGui.QGridLayout()
+l = QtWidgets.QGridLayout()
 l.setSpacing(0)
 cw.setLayout(l)
 
@@ -30,7 +30,7 @@ w2 = pg.GradientWidget(orientation='right', allowAdd=False)
 w3 = pg.GradientWidget(orientation='bottom')
 w4 = pg.GradientWidget(orientation='left')
 w4.loadPreset('spectrum')
-label = QtGui.QLabel("""
+label = QtWidgets.QLabel("""
 - Click a triangle to change its color
 - Drag triangles to move
 - Click in an empty area to add a new color
@@ -49,7 +49,7 @@ l.addWidget(label, 1, 1)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
 
 
 

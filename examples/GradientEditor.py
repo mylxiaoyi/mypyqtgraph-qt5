@@ -3,11 +3,11 @@
 import initExample
 
 import numpy as np
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 mw = pg.GraphicsView()
 mw.resize(800,800)
 mw.show()
@@ -25,4 +25,4 @@ mw.setCentralItem(ge)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

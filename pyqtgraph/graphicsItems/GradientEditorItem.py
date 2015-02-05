@@ -117,16 +117,16 @@ class TickSliderItem(GraphicsWidget):
         self.resetTransform()
         ort = orientation
         if ort == 'top':
-            self.scale(1, -1)
-            self.translate(0, -self.height())
+            self.setScale(-1)
+            self.moveBy(self.width(), 0)
         elif ort == 'left':
-            self.rotate(270)
-            self.scale(1, -1)
-            self.translate(-self.height(), -self.maxDim)
+            self.setRotation(270)
+            self.setScale(1)
+            #self.moveBy(-self.height(), -self.maxDim)
+            self.moveBy(self.maxDim, self.height())
         elif ort == 'right':
             self.setRotation(270)
-            self.moveBy(-self.height(), 0)
-            #self.setPos(0, -self.height())
+            self.moveBy(0, self.height())
         elif ort != 'bottom':
             raise Exception("%s is not a valid orientation. Options are 'left', 'right', 'top', and 'bottom'" %str(ort))
         
