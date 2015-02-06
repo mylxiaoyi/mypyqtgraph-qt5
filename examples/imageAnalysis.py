@@ -9,7 +9,7 @@ over the user interface.
 import initExample ## Add path to library (just for examples; you do not need this)
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 
 pg.mkQApp()
@@ -68,8 +68,8 @@ hist.setLevels(data.min(), data.max())
 iso.setData(pg.gaussianFilter(data, (2, 2)))
 
 # set position and scale of image
-img.scale(0.2, 0.2)
-img.translate(-50, 0)
+img.setScale(0.2)
+img.moveBy(-50, 0)
 
 # zoom to fit imageo
 p1.autoRange()  
@@ -95,4 +95,4 @@ isoLine.sigDragged.connect(updateIsocurve)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

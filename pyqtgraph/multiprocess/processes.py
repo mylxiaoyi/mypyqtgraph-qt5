@@ -267,9 +267,9 @@ class ForkedProcess(RemoteEventHandler):
             sys.excepthook = excepthook 
             
             ## Make it harder to access QApplication instance
-            if 'PyQt4.QtGui' in sys.modules:
-                sys.modules['PyQt4.QtGui'].QApplication = None
-            sys.modules.pop('PyQt4.QtGui', None)
+            if 'PyQt5.QtWidgets' in sys.modules:
+                sys.modules['PyQt5.QtWidgets'].QApplication = None
+            sys.modules.pop('PyQt5.QtWidgets', None)
             sys.modules.pop('PyQt4.QtCore', None)
             
             ## sabotage atexit callbacks
@@ -341,7 +341,7 @@ class RemoteQtEventHandler(RemoteEventHandler):
         RemoteEventHandler.__init__(self, *args, **kwds)
         
     def startEventTimer(self):
-        from ..Qt import QtGui, QtCore
+        from ..Qt import QtGui, QtCore, QtWidgets
         self.timer = QtCore.QTimer()
         self.timer.timeout.connect(self.processRequests)
         self.timer.start(10)
@@ -350,8 +350,8 @@ class RemoteQtEventHandler(RemoteEventHandler):
         try:
             RemoteEventHandler.processRequests(self)
         except ClosedError:
-            from ..Qt import QtGui, QtCore
-            QtGui.QApplication.instance().quit()
+            from ..Qt import QtGui, QtCore, QtWidgets
+            QtWidgets.QApplication.instance().quit()
             self.timer.stop()
             #raise SystemExit
 
@@ -383,9 +383,9 @@ class QtProcess(Process):
     def __init__(self, **kwds):
         if 'target' not in kwds:
             kwds['target'] = startQtEventLoop
-        from ..Qt import QtGui  ## avoid module-level import to keep bootstrap snappy.
+        from ..Qt import QtGui, QtWidgets  ## avoid module-level import to keep bootstrap snappy.
         self._processRequests = kwds.pop('processRequests', True)
-        if self._processRequests and QtGui.QApplication.instance() is None:
+        if self._processRequests and QtWidgets.QApplication.instance() is None:
             raise Exception("Must create QApplication before starting QtProcess, or use QtProcess(processRequests=False)")
         Process.__init__(self, **kwds)
         self.startEventTimer()
@@ -419,12 +419,12 @@ def startQtEventLoop(name, port, authkey, ppid, debug=False):
     conn = multiprocessing.connection.Client(('localhost', int(port)), authkey=authkey)
     if debug:
         cprint.cout(debug, '[%d] connected; starting remote proxy.\n' % os.getpid(), -1)
-    from ..Qt import QtGui, QtCore
+    from ..Qt import QtGui, QtCore, QtWidgets
     #from PyQt4 import QtGui, QtCore
-    app = QtGui.QApplication.instance()
+    app = QtWidgets.QApplication.instance()
     #print app
     if app is None:
-        app = QtGui.QApplication([])
+        app = QtWidgets.QApplication([])
         app.setQuitOnLastWindowClosed(False)  ## generally we want the event loop to stay open 
                                               ## until it is explicitly closed by the parent process.
     

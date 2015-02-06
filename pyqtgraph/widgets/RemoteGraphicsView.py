@@ -1,4 +1,4 @@
-from ..Qt import QtGui, QtCore, USE_PYSIDE
+from ..Qt import QtGui, QtCore, QtWidgets, USE_PYSIDE
 if not USE_PYSIDE:
     import sip
 from .. import multiprocess as mp
@@ -9,7 +9,7 @@ import mmap, tempfile, ctypes, atexit, sys, random
 
 __all__ = ['RemoteGraphicsView']
 
-class RemoteGraphicsView(QtGui.QWidget):
+class RemoteGraphicsView(QtWidgets.QWidget):
     """
     Replacement for GraphicsView that does all scene management and rendering on a remote process,
     while displaying on the local widget.
@@ -26,7 +26,7 @@ class RemoteGraphicsView(QtGui.QWidget):
         self._imgReq = None
         self._sizeHint = (640,480)  ## no clue why this is needed, but it seems to be the default sizeHint for GraphicsView.
                                     ## without it, the widget will not compete for space against another GraphicsView.
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
 
         # separate local keyword arguments from remote.
         remoteKwds = {}
@@ -42,7 +42,7 @@ class RemoteGraphicsView(QtGui.QWidget):
         self._view._setProxyOptions(deferGetattr=True)
         
         self.setFocusPolicy(QtCore.Qt.StrongFocus)
-        self.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Expanding)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Expanding)
         self.setMouseTracking(True)
         self.shm = None
         shmFileName = self._view.shmFileName()
@@ -61,7 +61,7 @@ class RemoteGraphicsView(QtGui.QWidget):
             setattr(self, method, getattr(self._view, method))
         
     def resizeEvent(self, ev):
-        ret = QtGui.QWidget.resizeEvent(self, ev)
+        ret = QtWidgets.QWidget.resizeEvent(self, ev)
         self._view.resize(self.size(), _callSync='off')
         return ret
         
@@ -95,35 +95,35 @@ class RemoteGraphicsView(QtGui.QWidget):
     def mousePressEvent(self, ev):
         self._view.mousePressEvent(int(ev.type()), ev.pos(), ev.globalPos(), int(ev.button()), int(ev.buttons()), int(ev.modifiers()), _callSync='off')
         ev.accept()
-        return QtGui.QWidget.mousePressEvent(self, ev)
+        return QtWidgets.QWidget.mousePressEvent(self, ev)
 
     def mouseReleaseEvent(self, ev):
         self._view.mouseReleaseEvent(int(ev.type()), ev.pos(), ev.globalPos(), int(ev.button()), int(ev.buttons()), int(ev.modifiers()), _callSync='off')
         ev.accept()
-        return QtGui.QWidget.mouseReleaseEvent(self, ev)
+        return QtWidgets.QWidget.mouseReleaseEvent(self, ev)
 
     def mouseMoveEvent(self, ev):
         self._view.mouseMoveEvent(int(ev.type()), ev.pos(), ev.globalPos(), int(ev.button()), int(ev.buttons()), int(ev.modifiers()), _callSync='off')
         ev.accept()
-        return QtGui.QWidget.mouseMoveEvent(self, ev)
+        return QtWidgets.QWidget.mouseMoveEvent(self, ev)
         
     def wheelEvent(self, ev):
-        self._view.wheelEvent(ev.pos(), ev.globalPos(), ev.delta(), int(ev.buttons()), int(ev.modifiers()), int(ev.orientation()), _callSync='off')
+        self._view.wheelEvent(ev.pos(), ev.globalPos(), ev.angleDelta().y(), int(ev.buttons()), int(ev.modifiers()), int(ev.orientation()), _callSync='off')
         ev.accept()
-        return QtGui.QWidget.wheelEvent(self, ev)
+        return QtWidgets.QWidget.wheelEvent(self, ev)
     
     def keyEvent(self, ev):
         if self._view.keyEvent(int(ev.type()), int(ev.modifiers()), text, autorep, count):
             ev.accept()
-        return QtGui.QWidget.keyEvent(self, ev)
+        return QtWidgets.QWidget.keyEvent(self, ev)
         
     def enterEvent(self, ev):
         self._view.enterEvent(int(ev.type()), _callSync='off')
-        return QtGui.QWidget.enterEvent(self, ev)
+        return QtWidgets.QWidget.enterEvent(self, ev)
         
     def leaveEvent(self, ev):
         self._view.leaveEvent(int(ev.type()), _callSync='off')
-        return QtGui.QWidget.leaveEvent(self, ev)
+        return QtWidgets.QWidget.leaveEvent(self, ev)
         
     def remoteProcess(self):
         """Return the remote process handle. (see multiprocess.remoteproxy.RemoteEventHandler)"""

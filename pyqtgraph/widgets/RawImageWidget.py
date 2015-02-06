@@ -1,4 +1,4 @@
-from ..Qt import QtCore, QtGui
+from ..Qt import QtCore, QtGui, QtWidgets
 try:
     from ..Qt import QtOpenGL
     from OpenGL.GL import *
@@ -9,7 +9,7 @@ except ImportError:
 from .. import functions as fn
 import numpy as np
 
-class RawImageWidget(QtGui.QWidget):
+class RawImageWidget(QtWidgets.QWidget):
     """
     Widget optimized for very fast video display. 
     Generally using an ImageItem inside GraphicsView is fast enough.
@@ -19,8 +19,8 @@ class RawImageWidget(QtGui.QWidget):
         """
         Setting scaled=True will cause the entire image to be displayed within the boundaries of the widget. This also greatly reduces the speed at which it will draw frames.
         """
-        QtGui.QWidget.__init__(self, parent=None)
-        self.setSizePolicy(QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding,QtGui.QSizePolicy.Expanding))
+        QtWidgets.QWidget.__init__(self, parent=None)
+        self.setSizePolicy(QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Expanding,QtWidgets.QSizePolicy.Expanding))
         self.scaled = scaled
         self.opts = None
         self.image = None

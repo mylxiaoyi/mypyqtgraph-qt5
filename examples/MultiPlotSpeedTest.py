@@ -8,12 +8,12 @@ Test the speed of rapidly updating multiple plot curves
 import initExample
 
 
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import numpy as np
 import pyqtgraph as pg
 from pyqtgraph.ptime import time
 #QtGui.QApplication.setGraphicsSystem('raster')
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 #mw = QtGui.QMainWindow()
 #mw.resize(800,800)
 
@@ -74,4 +74,4 @@ timer.start(0)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

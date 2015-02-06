@@ -8,12 +8,12 @@ the left/right mouse buttons. Right click on any plot to show a context menu.
 import initExample ## Add path to library (just for examples; you do not need this)
 
 
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import numpy as np
 import pyqtgraph as pg
 
 #QtGui.QApplication.setGraphicsSystem('raster')
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 #mw = QtGui.QMainWindow()
 #mw.resize(800,800)
 
@@ -100,4 +100,4 @@ updatePlot()
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

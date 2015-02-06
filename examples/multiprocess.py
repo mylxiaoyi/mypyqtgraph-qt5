@@ -39,8 +39,8 @@ print( "process finished")
 
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
-app = pg.QtGui.QApplication([])
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
+app = pg.QtWidgets.QApplication([])
 
 print( "\n=================\nStart QtProcess")
 import sys

@@ -1,6 +1,6 @@
 from .GraphicsWidget import GraphicsWidget
 from .LabelItem import LabelItem
-from ..Qt import QtGui, QtCore
+from ..Qt import QtGui, QtCore, QtWidgets
 from .. import functions as fn
 from ..Point import Point
 from .ScatterPlotItem import ScatterPlotItem, drawSymbol
@@ -39,7 +39,7 @@ class LegendItem(GraphicsWidget, GraphicsWidgetAnchor):
         GraphicsWidget.__init__(self)
         GraphicsWidgetAnchor.__init__(self)
         self.setFlag(self.ItemIgnoresTransformations)
-        self.layout = QtGui.QGraphicsGridLayout()
+        self.layout = QtWidgets.QGraphicsGridLayout()
         self.setLayout(self.layout)
         self.items = []
         self.size = size

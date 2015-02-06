@@ -4,12 +4,12 @@
 import initExample
 
 
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 import pyqtgraph as pg
 
 ## create GUI
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 w = pg.GraphicsWindow(size=(800,800), border=True)
 
@@ -94,10 +94,10 @@ def updateRoiPlot(roi, data=None):
 rois = []
 rois.append(pg.TestROI([0,  0], [20, 20], maxBounds=QtCore.QRectF(-10, -10, 230, 140), pen=(0,9)))
 rois.append(pg.LineROI([0,  0], [20, 20], width=5, pen=(1,9)))
-rois.append(pg.MultiLineROI([[0, 50], [50, 60], [60, 30]], width=5, pen=(2,9)))
+rois.append(pg.MultiRectROI([[0, 50], [50, 60], [60, 30]], width=5, pen=(2,9)))
 rois.append(pg.EllipseROI([110, 10], [30, 20], pen=(3,9)))
 rois.append(pg.CircleROI([110, 50], [20, 20], pen=(4,9)))
-rois.append(pg.PolygonROI([[2,0], [2.1,0], [2,.1]], pen=(5,9)))
+rois.append(pg.PolyLineROI([[2,0], [2.1,0], [2,.1]], pen=(5,9)))
 #rois.append(SpiralROI([20,30], [1,1], pen=mkPen(0)))
 
 ## Add each ROI to the scene and link its data to a plot curve with the same color
@@ -126,4 +126,4 @@ t.start(50)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

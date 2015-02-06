@@ -6,11 +6,11 @@ Simple logarithmic plotting test
 import initExample ## Add path to library (just for examples; you do not need this)
 
 
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import numpy as np
 import pyqtgraph as pg
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 win = pg.GraphicsWindow(title="Basic plotting examples")
 win.resize(1000,600)
@@ -34,4 +34,4 @@ p5.setLogMode(x=True, y=False)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from PyQt4 import QtGui, QtCore
+from PyQt5 import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 #from pyqtgraph.canvas import Canvas, CanvasItem
 import numpy as np
@@ -156,7 +156,7 @@ class Optic(pg.GraphicsObject, ParamObj):
         # Move graphics item
         self.gitem.setPos(Point(self['pos']))
         self.gitem.resetTransform()
-        self.gitem.rotate(self['angle'])
+        self.gitem.setRotation(self['angle'])
         
         # Move ROI to match
         try:

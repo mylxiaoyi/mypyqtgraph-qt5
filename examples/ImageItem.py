@@ -6,12 +6,12 @@ Demonstrates very basic use of ImageItem to display image data inside a ViewBox.
 ## Add path to library (just for examples; you do not need this)
 import initExample
 
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 import pyqtgraph as pg
 import pyqtgraph.ptime as ptime
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 ## Create window with GraphicsView widget
 win = pg.GraphicsLayoutWidget()
@@ -58,4 +58,4 @@ updateData()
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

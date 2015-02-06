@@ -8,18 +8,18 @@ GraphicsView with a PlotItem placed in its center.
 import initExample ## Add path to library (just for examples; you do not need this)
 
 
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import numpy as np
 import pyqtgraph as pg
 
 #QtGui.QApplication.setGraphicsSystem('raster')
-app = QtGui.QApplication([])
-mw = QtGui.QMainWindow()
+app = QtWidgets.QApplication([])
+mw = QtWidgets.QMainWindow()
 mw.setWindowTitle('pyqtgraph example: PlotWidget')
 mw.resize(800,800)
-cw = QtGui.QWidget()
+cw = QtWidgets.QWidget()
 mw.setCentralWidget(cw)
-l = QtGui.QVBoxLayout()
+l = QtWidgets.QVBoxLayout()
 cw.setLayout(l)
 
 pw = pg.PlotWidget(name='Plot1')  ## giving the plots names allows us to link their axes together
@@ -36,7 +36,7 @@ p1 = pw.plot()
 p1.setPen((200,200,100))
 
 ## Add in some extra graphics
-rect = QtGui.QGraphicsRectItem(QtCore.QRectF(0, 0, 1, 5e-11))
+rect = QtWidgets.QGraphicsRectItem(QtCore.QRectF(0, 0, 1, 5e-11))
 rect.setPen(QtGui.QPen(QtGui.QColor(100, 200, 100)))
 pw.addItem(rect)
 
@@ -91,4 +91,4 @@ line.setBounds([0,200])
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

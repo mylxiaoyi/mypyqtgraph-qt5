@@ -10,7 +10,7 @@ is used by the view widget
 import initExample ## Add path to library (just for examples; you do not need this)
 
 
-from pyqtgraph.Qt import QtGui, QtCore, USE_PYSIDE
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets, USE_PYSIDE
 import numpy as np
 import pyqtgraph as pg
 import pyqtgraph.ptime as ptime
@@ -22,11 +22,11 @@ else:
     
 
 #QtGui.QApplication.setGraphicsSystem('raster')
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 #mw = QtGui.QMainWindow()
 #mw.resize(800,800)
 
-win = QtGui.QMainWindow()
+win = QtWidgets.QMainWindow()
 win.setWindowTitle('pyqtgraph example: VideoSpeedTest')
 ui = VideoTemplate.Ui_MainWindow()
 ui.setupUi(win)
@@ -187,4 +187,4 @@ timer.start(0)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

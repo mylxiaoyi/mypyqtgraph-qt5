@@ -14,13 +14,13 @@ displaying and analyzing 2D and 3D data. ImageView provides:
 import initExample
 
 import numpy as np
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import pyqtgraph as pg
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 ## Create window with ImageView widget
-win = QtGui.QMainWindow()
+win = QtWidgets.QMainWindow()
 win.resize(800,800)
 imv = pg.ImageView()
 win.setCentralWidget(imv)
@@ -52,4 +52,4 @@ imv.setImage(data, xvals=np.linspace(1., 3., data.shape[0]))
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

@@ -8,7 +8,7 @@ Demonstrates a way to put multiple axes around a single plot.
 import initExample ## Add path to library (just for examples; you do not need this)
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 
 pg.mkQApp()
@@ -64,4 +64,4 @@ p3.addItem(pg.PlotCurveItem([3200,1600,800,400,200,100], pen='r'))
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

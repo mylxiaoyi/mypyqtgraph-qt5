@@ -6,7 +6,7 @@ import initExample
 
 from scipy import random
 from numpy import linspace
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 from pyqtgraph import MultiPlotWidget
 try:
@@ -15,8 +15,8 @@ except:
     print("MultiPlot is only used with MetaArray for now (and you do not have the metaarray package)")
     exit()
 
-app = QtGui.QApplication([])
-mw = QtGui.QMainWindow()
+app = QtWidgets.QApplication([])
+mw = QtWidgets.QMainWindow()
 mw.resize(800,800)
 pw = MultiPlotWidget()
 mw.setCentralWidget(pw)
@@ -37,5 +37,5 @@ pw.plot(ma)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
 

@@ -11,11 +11,11 @@ QDoubleSpinBox providing some advanced features:
 import initExample ## Add path to library (just for examples; you do not need this)
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import numpy as np
 
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 
 
 spins = [
@@ -28,16 +28,16 @@ spins = [
 ]
 
 
-win = QtGui.QMainWindow()
+win = QtWidgets.QMainWindow()
 win.setWindowTitle('pyqtgraph example: SpinBox')
-cw = QtGui.QWidget()
-layout = QtGui.QGridLayout()
+cw = QtWidgets.QWidget()
+layout = QtWidgets.QGridLayout()
 cw.setLayout(layout)
 win.setCentralWidget(cw)
 win.show()
 #win.resize(300, 600)
-changingLabel = QtGui.QLabel()  ## updated immediately
-changedLabel = QtGui.QLabel()   ## updated only when editing is finished or mouse wheel has stopped for 0.3sec
+changingLabel = QtWidgets.QLabel()  ## updated immediately
+changedLabel = QtWidgets.QLabel()   ## updated only when editing is finished or mouse wheel has stopped for 0.3sec
 changingLabel.setMinimumWidth(200)
 font = changingLabel.font()
 font.setBold(True)
@@ -55,7 +55,7 @@ def valueChanging(sb, value):
 
     
 for text, spin in spins:
-    label = QtGui.QLabel(text)
+    label = QtWidgets.QLabel(text)
     labels.append(label)
     layout.addWidget(label)
     layout.addWidget(spin)
@@ -113,4 +113,4 @@ layout.addWidget(changedLabel, 2, 1)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

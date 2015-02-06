@@ -11,10 +11,10 @@ as well as some customized parameter types
 import initExample ## Add path to library (just for examples; you do not need this)
 
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 import pyqtgraph.parametertree.parameterTypes as pTypes
 from pyqtgraph.parametertree import Parameter, ParameterTree, ParameterItem, registerParameterType
 
@@ -154,10 +154,10 @@ t.setWindowTitle('pyqtgraph example: Parameter Tree')
 t2 = ParameterTree()
 t2.setParameters(p, showTop=False)
 
-win = QtGui.QWidget()
-layout = QtGui.QGridLayout()
+win = QtWidgets.QWidget()
+layout = QtWidgets.QGridLayout()
 win.setLayout(layout)
-layout.addWidget(QtGui.QLabel("These are two views of the same data. They should always display the same values."), 0,  0, 1, 2)
+layout.addWidget(QtWidgets.QLabel("These are two views of the same data. They should always display the same values."), 0,  0, 1, 2)
 layout.addWidget(t, 1, 0, 1, 1)
 layout.addWidget(t2, 1, 1, 1, 1)
 win.show()
@@ -172,4 +172,4 @@ p.restoreState(s)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

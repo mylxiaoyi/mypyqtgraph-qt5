@@ -7,20 +7,20 @@ Use a HistogramLUTWidget to control the contrast / coloration of an image.
 import initExample
 
 import numpy as np
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 
 
-app = QtGui.QApplication([])
-win = QtGui.QMainWindow()
+app = QtWidgets.QApplication([])
+win = QtWidgets.QMainWindow()
 win.resize(800,600)
 win.show()
 win.setWindowTitle('pyqtgraph example: Histogram LUT')
 
-cw = QtGui.QWidget()
+cw = QtWidgets.QWidget()
 win.setCentralWidget(cw)
 
-l = QtGui.QGridLayout()
+l = QtWidgets.QGridLayout()
 cw.setLayout(l)
 l.setSpacing(0)
 
@@ -51,4 +51,4 @@ w.setImageItem(img)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

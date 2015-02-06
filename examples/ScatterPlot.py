@@ -8,12 +8,12 @@ Example demonstrating a variety of scatter plot features.
 ## Add path to library (just for examples; you do not need this)
 import initExample
 
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 import numpy as np
 
-app = QtGui.QApplication([])
-mw = QtGui.QMainWindow()
+app = QtWidgets.QApplication([])
+mw = QtWidgets.QMainWindow()
 mw.resize(800,800)
 view = pg.GraphicsLayoutWidget()  ## GraphicsView with GraphicsLayout inserted by default
 mw.setCentralWidget(view)
@@ -98,5 +98,5 @@ s4.sigClicked.connect(clicked)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
 

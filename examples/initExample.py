@@ -23,14 +23,14 @@ if not hasattr(sys, 'frozen'):
 if 'pyside' in sys.argv:  
     from PySide import QtGui
 elif 'pyqt' in sys.argv: 
-    from PyQt4 import QtGui
+    from PyQt5 import QtGui, QtWidgets
 else:
-    from pyqtgraph.Qt import QtGui
+    from pyqtgraph.Qt import QtGui, QtWidgets
     
 ## Force use of a specific graphics system
 for gs in ['raster', 'native', 'opengl']:
     if gs in sys.argv:
-        QtGui.QApplication.setGraphicsSystem(gs)
+        QtWidgets.QApplication.setGraphicsSystem(gs)
         break
 
 ## Enable fault handling to give more helpful error messages on crash. 

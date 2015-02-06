@@ -2,18 +2,18 @@
 ## Add path to library (just for examples; you do not need this)
 import initExample
 
-from pyqtgraph.Qt import QtCore, QtGui
+from pyqtgraph.Qt import QtCore, QtGui, QtWidgets
 import pyqtgraph as pg
 from pyqtgraph.GraphicsScene import GraphicsScene
 
-app = QtGui.QApplication([])
+app = QtWidgets.QApplication([])
 win = pg.GraphicsView()
 win.show()
 
 
-class Obj(QtGui.QGraphicsObject):
+class Obj(QtWidgets.QGraphicsObject):
     def __init__(self):
-        QtGui.QGraphicsObject.__init__(self)
+        QtWidgets.QGraphicsObject.__init__(self)
         GraphicsScene.registerObject(self)
         
     def paint(self, p, *args):
@@ -48,9 +48,9 @@ win.addItem(obj2)
 
 def clicked():
     print("button click")
-btn = QtGui.QPushButton("BTN")
+btn = QtWidgets.QPushButton("BTN")
 btn.clicked.connect(clicked)
-prox = QtGui.QGraphicsProxyWidget()
+prox = QtWidgets.QGraphicsProxyWidget()
 prox.setWidget(btn)
 prox.setPos(100,0)
 vb.addItem(prox)
@@ -63,4 +63,4 @@ vb.addItem(g)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

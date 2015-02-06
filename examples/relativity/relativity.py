@@ -1,5 +1,5 @@
 import pyqtgraph as pg
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 from pyqtgraph.parametertree import Parameter, ParameterTree
 from pyqtgraph.parametertree import types as pTypes
 import pyqtgraph.configfile
@@ -10,9 +10,9 @@ import sys, os
 
 
 
-class RelativityGUI(QtGui.QWidget):
+class RelativityGUI(QtWidgets.QWidget):
     def __init__(self):
-        QtGui.QWidget.__init__(self)
+        QtWidgets.QWidget.__init__(self)
         
         self.animations = []
         self.animTimer = QtCore.QTimer()
@@ -54,17 +54,17 @@ class RelativityGUI(QtGui.QWidget):
         
         
     def setupGUI(self):
-        self.layout = QtGui.QVBoxLayout()
+        self.layout = QtWidgets.QVBoxLayout()
         self.layout.setContentsMargins(0,0,0,0)
         self.setLayout(self.layout)
-        self.splitter = QtGui.QSplitter()
+        self.splitter = QtWidgets.QSplitter()
         self.splitter.setOrientation(QtCore.Qt.Horizontal)
         self.layout.addWidget(self.splitter)
         
         self.tree = ParameterTree(showHeader=False)
         self.splitter.addWidget(self.tree)
         
-        self.splitter2 = QtGui.QSplitter()
+        self.splitter2 = QtWidgets.QSplitter()
         self.splitter2.setOrientation(QtCore.Qt.Vertical)
         self.splitter.addWidget(self.splitter2)
         
@@ -160,14 +160,14 @@ class RelativityGUI(QtGui.QWidget):
         self.setAnimation(self.params['Animate'])
         
     def save(self):
-        fn = str(pg.QtGui.QFileDialog.getSaveFileName(self, "Save State..", "untitled.cfg", "Config Files (*.cfg)"))
+        fn = str(pg.QtWidgets.QFileDialog.getSaveFileName(self, "Save State..", "untitled.cfg", "Config Files (*.cfg)"))
         if fn == '':
             return
         state = self.params.saveState()
         pg.configfile.writeConfigFile(state, fn) 
         
     def load(self):
-        fn = str(pg.QtGui.QFileDialog.getOpenFileName(self, "Save State..", "", "Config Files (*.cfg)"))
+        fn = str(pg.QtWidgets.QFileDialog.getOpenFileName(self, "Save State..", "", "Config Files (*.cfg)"))
         if fn == '':
             return
         state = pg.configfile.readConfigFile(fn) 
@@ -674,14 +674,14 @@ class ClockItem(pg.ItemGroup):
     def __init__(self, clock):
         pg.ItemGroup.__init__(self)
         self.size = clock.size
-        self.item = QtGui.QGraphicsEllipseItem(QtCore.QRectF(0, 0, self.size, self.size))
-        self.item.translate(-self.size*0.5, -self.size*0.5)
+        self.item = QtWidgets.QGraphicsEllipseItem(QtCore.QRectF(0, 0, self.size, self.size))
+        self.item.moveBy(-self.size*0.5, -self.size*0.5)
         self.item.setPen(pg.mkPen(100,100,100))
         self.item.setBrush(clock.brush)
-        self.hand = QtGui.QGraphicsLineItem(0, 0, 0, self.size*0.5)
+        self.hand = QtWidgets.QGraphicsLineItem(0, 0, 0, self.size*0.5)
         self.hand.setPen(pg.mkPen('w'))
         self.hand.setZValue(10)
-        self.flare = QtGui.QGraphicsPolygonItem(QtGui.QPolygonF([
+        self.flare = QtWidgets.QGraphicsPolygonItem(QtGui.QPolygonF([
             QtCore.QPointF(0, -self.size*0.25),
             QtCore.QPointF(0, self.size*0.25),
             QtCore.QPointF(self.size*1.5, 0),
@@ -722,16 +722,16 @@ class ClockItem(pg.ItemGroup):
         self.resetTransform()
         v = data['v'][self.i]
         gam = (1.0 - v**2)**0.5
-        self.scale(gam, 1.0)
+        self.setScale(gam)
         
         f = data['f'][self.i]
         self.flare.resetTransform()
         if f < 0:
-            self.flare.translate(self.size*0.4, 0)
+            self.flare.moveBy(self.size*0.4, 0)
         else:
-            self.flare.translate(-self.size*0.4, 0)
+            self.flare.moveBy(-self.size*0.4, 0)
         
-        self.flare.scale(-f * (0.5+np.random.random()*0.1), 1.0)
+        self.flare.setScale(-f * (0.5+np.random.random()*0.1))
         
         if self._spaceline is not None:
             self._spaceline.setPos(pg.Point(data['x'][self.i], data['t'][self.i]))
@@ -766,7 +766,7 @@ if __name__ == '__main__':
     win.resize(1100,700)
     
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
     
     
     #win.params.param('Objects').restoreState(state, removeChildren=False)

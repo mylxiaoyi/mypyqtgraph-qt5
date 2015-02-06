@@ -8,17 +8,17 @@ letting go of the joystick).
 
 import initExample ## Add path to library (just for examples; you do not need this)
 
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 
 
-app = QtGui.QApplication([])
-mw = QtGui.QMainWindow()
+app = QtWidgets.QApplication([])
+mw = QtWidgets.QMainWindow()
 mw.resize(300,50)
 mw.setWindowTitle('pyqtgraph example: JoystickButton')
-cw = QtGui.QWidget()
+cw = QtWidgets.QWidget()
 mw.setCentralWidget(cw)
-layout = QtGui.QGridLayout()
+layout = QtWidgets.QGridLayout()
 cw.setLayout(layout)
 mw.show()
 
@@ -53,4 +53,4 @@ timer.start(30)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

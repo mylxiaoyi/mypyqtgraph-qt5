@@ -7,7 +7,7 @@ parent, which can improve CPU usage on multi-core processors.
 """
 import initExample ## Add path to library (just for examples; you do not need this)
 
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 from pyqtgraph.widgets.RemoteGraphicsView import RemoteGraphicsView
 app = pg.mkQApp()
@@ -31,4 +31,4 @@ plt.plot([1,4,2,3,6,2,3,4,2,3], pen='g')
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()

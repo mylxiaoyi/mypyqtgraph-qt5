@@ -7,7 +7,7 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 try:
     _fromUtf8 = QtCore.QString.fromUtf8
@@ -18,22 +18,22 @@ class Ui_Form(object):
     def setupUi(self, Form):
         Form.setObjectName(_fromUtf8("Form"))
         Form.resize(400, 300)
-        self.gridLayout = QtGui.QGridLayout(Form)
+        self.gridLayout = QtWidgets.QGridLayout(Form)
         self.gridLayout.setObjectName(_fromUtf8("gridLayout"))
-        self.sizeSpin = QtGui.QSpinBox(Form)
+        self.sizeSpin = QtWidgets.QSpinBox(Form)
         self.sizeSpin.setProperty("value", 10)
         self.sizeSpin.setObjectName(_fromUtf8("sizeSpin"))
         self.gridLayout.addWidget(self.sizeSpin, 1, 1, 1, 1)
-        self.pixelModeCheck = QtGui.QCheckBox(Form)
+        self.pixelModeCheck = QtWidgets.QCheckBox(Form)
         self.pixelModeCheck.setObjectName(_fromUtf8("pixelModeCheck"))
         self.gridLayout.addWidget(self.pixelModeCheck, 1, 3, 1, 1)
-        self.label = QtGui.QLabel(Form)
+        self.label = QtWidgets.QLabel(Form)
         self.label.setObjectName(_fromUtf8("label"))
         self.gridLayout.addWidget(self.label, 1, 0, 1, 1)
         self.plot = PlotWidget(Form)
         self.plot.setObjectName(_fromUtf8("plot"))
         self.gridLayout.addWidget(self.plot, 0, 0, 1, 4)
-        self.randCheck = QtGui.QCheckBox(Form)
+        self.randCheck = QtWidgets.QCheckBox(Form)
         self.randCheck.setObjectName(_fromUtf8("randCheck"))
         self.gridLayout.addWidget(self.randCheck, 1, 2, 1, 1)
 
@@ -41,9 +41,9 @@ class Ui_Form(object):
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
-        Form.setWindowTitle(QtGui.QApplication.translate("Form", "Form", None, QtGui.QApplication.UnicodeUTF8))
-        self.pixelModeCheck.setText(QtGui.QApplication.translate("Form", "pixel mode", None, QtGui.QApplication.UnicodeUTF8))
-        self.label.setText(QtGui.QApplication.translate("Form", "Size", None, QtGui.QApplication.UnicodeUTF8))
-        self.randCheck.setText(QtGui.QApplication.translate("Form", "Randomize", None, QtGui.QApplication.UnicodeUTF8))
+        Form.setWindowTitle(QtWidgets.QApplication.translate("Form", "Form", None))
+        self.pixelModeCheck.setText(QtWidgets.QApplication.translate("Form", "pixel mode", None))
+        self.label.setText(QtWidgets.QApplication.translate("Form", "Size", None))
+        self.randCheck.setText(QtWidgets.QApplication.translate("Form", "Randomize", None))
 
 from pyqtgraph import PlotWidget

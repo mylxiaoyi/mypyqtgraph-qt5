@@ -60,7 +60,7 @@ class TableWidget(QtWidgets.QTableWidget):
         
         self.setVerticalScrollMode(self.ScrollPerPixel)
         self.setSelectionMode(QtWidgets.QAbstractItemView.ContiguousSelection)
-        self.setSizePolicy(QtGui.QSizePolicy.Preferred, QtGui.QSizePolicy.Preferred)
+        self.setSizePolicy(QtWidgets.QSizePolicy.Preferred, QtWidgets.QSizePolicy.Preferred)
         self.clear()
         
         kwds.setdefault('sortable', True)

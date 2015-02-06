@@ -20,3 +20,8 @@ pyqtgraph/flowchart/*.pyc
 pyqtgraph/flowchart/library/*.pyc
 pyqtgraph/opengl/*.pyc
 pyqtgraph/opengl/items/*.pyc
+examples/optics/*.pyc
+examples/relativeity/*.pyc
+pyqtgraph/multiprocess/*.pyc
+examples/verlet_chain/*.pyc
+examples/relativity/*.pyc

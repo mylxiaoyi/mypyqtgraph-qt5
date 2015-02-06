@@ -12,7 +12,7 @@ remote case is much faster.
 """
 
 import initExample ## Add path to library (just for examples; you do not need this)
-from pyqtgraph.Qt import QtGui, QtCore
+from pyqtgraph.Qt import QtGui, QtCore, QtWidgets
 import pyqtgraph as pg
 import pyqtgraph.widgets.RemoteGraphicsView
 import numpy as np
@@ -24,10 +24,10 @@ pg.setConfigOptions(antialias=True)  ## this will be expensive for the local plo
 view.pg.setConfigOptions(antialias=True)  ## prettier plots at no cost to the main process! 
 view.setWindowTitle('pyqtgraph example: RemoteSpeedTest')
 
-label = QtGui.QLabel()
-rcheck = QtGui.QCheckBox('plot remote')
+label = QtWidgets.QLabel()
+rcheck = QtWidgets.QCheckBox('plot remote')
 rcheck.setChecked(True)
-lcheck = QtGui.QCheckBox('plot local')
+lcheck = QtWidgets.QCheckBox('plot local')
 lplt = pg.PlotWidget()
 layout = pg.LayoutWidget()
 layout.addWidget(rcheck)
@@ -76,4 +76,4 @@ timer.start(0)
 if __name__ == '__main__':
     import sys
     if (sys.flags.interactive != 1) or not hasattr(QtCore, 'PYQT_VERSION'):
-        QtGui.QApplication.instance().exec_()
+        QtWidgets.QApplication.instance().exec_()
